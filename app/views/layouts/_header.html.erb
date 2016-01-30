@@ -15,7 +15,17 @@
     </li>
   </ul>
   <form class="form-inline pull-xs-right">
-    <input class="form-control" type="text" placeholder="Search">
-    <button class="btn btn-success-outline" type="submit">Search</button>
+    <div class="btn-group">
+      <% if current_teacher %>
+        <%= link_to 'Sign Out!', destroy_teacher_session_path, method: :delete, class: "btn btn-danger-outline" %>
+      <% elsif current_student %>
+        <%= link_to 'Sign Out!', destroy_student_session_path, method: :delete, class: "btn btn-danger-outline" %>
+      <% else %>
+        <%= link_to 'Teacher', new_teacher_session_path, class: "btn btn-success-outline" %>
+        <%= link_to 'Student', new_student_session_path, class: "btn btn-success-outline" %>
+      <% end %>
+    </div>
+    <!-- <input class="form-control" type="text" placeholder="Search">
+    <button class="btn btn-success-outline" type="submit">Search</button> -->
   </form>
 </nav>
