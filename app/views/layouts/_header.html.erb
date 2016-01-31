@@ -21,6 +21,7 @@
       <% elsif current_student %>
         <%= link_to 'Sign Out!', destroy_student_session_path, method: :delete, class: "btn btn-danger-outline" %>
       <% else %>
+        <%= link_to 'Login As', '#', class: "btn" %>
         <%= link_to 'Teacher', new_teacher_session_path, class: "btn btn-success-outline" %>
         <%= link_to 'Student', new_student_session_path, class: "btn btn-success-outline" %>
       <% end %>

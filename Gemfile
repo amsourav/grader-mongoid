@@ -7,6 +7,8 @@ gem 'simple_form'
 gem 'bootstrap', '~> 4.0.0.alpha3'
 gem 'carrierwave-mongoid', :require => 'carrierwave/mongoid'
 gem 'mongoid-grid_fs', git: 'https://github.com/ahoward/mongoid-grid_fs'
+gem 'sidekiq'
+gem 'carrierwave_backgrounder'
 
 gem 'rails', '4.2.5.1'
 gem 'sass-rails', '~> 5.0'
@@ -24,7 +26,7 @@ group :development, :test do
   gem 'bullet'
   gem 'rack-mini-profiler'
   gem 'better_errors'
-
+  gem 'pry-rails'
 end
 
 group :development do

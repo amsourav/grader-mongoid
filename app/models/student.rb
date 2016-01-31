@@ -8,6 +8,7 @@ class Student
   ## Database authenticatable
   field :email,              type: String, default: ""
   field :encrypted_password, type: String, default: ""
+  field :profile_empty,      type: Integer, default: 0
 
   ## Recoverable
   field :reset_password_token,   type: String
@@ -34,4 +35,5 @@ class Student
   # field :unlock_token,    type: String # Only if unlock strategy is :email or :both
   # field :locked_at,       type: Time
   embeds_one :student_profile
+  accepts_nested_attributes_for :student_profile
 end
