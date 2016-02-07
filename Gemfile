@@ -9,6 +9,7 @@ gem 'carrierwave-mongoid', :require => 'carrierwave/mongoid'
 gem 'mongoid-grid_fs', git: 'https://github.com/ahoward/mongoid-grid_fs'
 gem 'sidekiq'
 gem 'carrierwave_backgrounder'
+gem 'nprogress-rails'
 
 gem 'rails', '4.2.5.1'
 gem 'sass-rails', '~> 5.0'

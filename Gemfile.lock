@@ -128,6 +128,7 @@ GEM
     multi_json (1.11.2)
     nokogiri (1.6.7.2)
       mini_portile2 (~> 2.0.0.rc2)
+    nprogress-rails (0.1.6.7)
     origin (2.2.0)
     orm_adapter (0.5.0)
     pry (0.10.3)
@@ -256,6 +257,7 @@ DEPENDENCIES
   jquery-rails
   mongoid
   mongoid-grid_fs!
+  nprogress-rails
   pry-rails
   rack-mini-profiler
   rails (= 4.2.5.1)

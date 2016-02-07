@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+  resources :courses do
+    resources :exams
+  end
   devise_for :students
   devise_for :teachers
   get 'home/index'
