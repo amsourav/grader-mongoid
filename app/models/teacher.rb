@@ -36,4 +36,5 @@ class Teacher
   # field :locked_at,       type: Time
   embeds_one :teacher_profile
   has_many :courses
+  has_many :questionpaperspecs
 end

@@ -1,10 +1,20 @@
 class ExamsController < ApplicationController
-  before_action :set_exam, only: [:show, :edit, :update, :destroy]
+  before_action :set_exam, only: [:show, :edit, :update, :destroy, :upload_doc, :upload_doc_submit]
   before_action :set_course
   # GET /exams
   # GET /exams.json
   def index
     @exams = @course.exams.all
+  end
+
+  def upload_doc
+  end
+
+  def upload_doc_submit
+    @exam.update(upload_doc_submit_params)
+    if @exam.update(upload_doc_submit_params)
+      redirect_to course_exam_path(@course, @exam)
+    end
   end
 
   # GET /exams/1
@@ -32,6 +42,9 @@ class ExamsController < ApplicationController
     end
     respond_to do |format|
       if @exam.save
+        @exam.total_marks = @exam.questionpaperspecs.sum(:marks)
+        @exam.total_pages = @exam.exam_students.length * @exam.questionpaperspecs.length
+        @exam.save
         format.html { redirect_to course_exam_url(@course, @exam), notice: 'Exam was successfully created.' }
         format.json { render :show, status: :created, location: @exam }
       else
@@ -78,6 +91,10 @@ class ExamsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def exam_params
-      params.require(:exam).permit(:name, :date, :student_list, questionpaperspecs_attributes: [:id, :tag, :marks, :page])
+      params.require(:exam).permit(:name, :date, :student_list, questionpaperspecs_attributes: [:id, :tag, :marks, :page, :teacher_id, :_destroy])
+    end
+
+    def upload_doc_submit_params
+      params.require(:exam).permit(:exam_doc)
     end
 end

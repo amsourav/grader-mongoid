@@ -1,11 +1,18 @@
 Rails.application.routes.draw do
+  get 'jobs/index'
+  root 'jobs#index'
+
   resources :courses do
-    resources :exams
+    resources :exams do
+      member do
+        get 'upload_doc'
+        patch 'upload_doc_submit'
+      end
+    end
   end
   devise_for :students
   devise_for :teachers
   get 'home/index'
-  root 'home#index'
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

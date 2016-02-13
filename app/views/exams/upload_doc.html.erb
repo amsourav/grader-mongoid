@@ -1,0 +1,13 @@
+<%= simple_form_for([@course, @exam], :url => upload_doc_submit_course_exam_path, method: :patch) do |f| %>
+    <%= f.error_notification %>
+    <div class="form-inputs">
+      <div class="col-md-4">
+        <%= f.file_field :exam_doc %>
+      </div>
+    </div>
+
+    <div class="form-actions">
+        <%= f.submit %>
+    </div>
+
+<% end %>

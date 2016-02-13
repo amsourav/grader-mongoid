@@ -9,6 +9,7 @@ GIT
 GEM
   remote: https://rubygems.org/
   specs:
+    Ascii85 (1.0.2)
     actionmailer (4.2.5.1)
       actionpack (= 4.2.5.1)
       actionview (= 4.2.5.1)
@@ -44,6 +45,7 @@ GEM
       minitest (~> 5.1)
       thread_safe (~> 0.3, >= 0.3.4)
       tzinfo (~> 1.1)
+    afm (0.2.2)
     arel (6.0.3)
     autoprefixer-rails (6.3.1)
       execjs
@@ -96,11 +98,14 @@ GEM
       thread_safe (~> 0.1)
       warden (~> 1.2.3)
     diff-lcs (1.2.5)
+    docsplit (0.7.6)
     erubis (2.7.0)
     eventmachine (1.0.9.1)
     execjs (2.6.0)
     globalid (0.3.6)
       activesupport (>= 4.1.0)
+    grim (1.2.0)
+    hashery (2.1.1)
     i18n (0.7.0)
     jbuilder (2.4.0)
       activesupport (>= 3.0.0, < 5.1)
@@ -132,6 +137,12 @@ GEM
     nprogress-rails (0.1.6.7)
     origin (2.2.0)
     orm_adapter (0.5.0)
+    pdf-reader (1.3.3)
+      Ascii85 (~> 1.0.0)
+      afm (~> 0.2.0)
+      hashery (~> 2.0)
+      ruby-rc4
+      ttfunk
     pry (0.10.3)
       coderay (~> 1.1.0)
       method_source (~> 0.8.1)
@@ -173,6 +184,7 @@ GEM
     ref (2.0.0)
     responders (2.1.1)
       railties (>= 4.2.0, < 5.1)
+    rmagick (2.15.4)
     rspec-core (3.4.2)
       rspec-support (~> 3.4.0)
     rspec-expectations (3.4.0)
@@ -190,6 +202,7 @@ GEM
       rspec-mocks (~> 3.4.0)
       rspec-support (~> 3.4.0)
     rspec-support (3.4.1)
+    ruby-rc4 (0.1.5)
     sass (3.4.21)
     sass-rails (5.0.4)
       railties (>= 4.0.0, < 5.0)
@@ -227,6 +240,7 @@ GEM
     thor (0.19.1)
     thread_safe (0.3.5)
     tilt (2.0.2)
+    ttfunk (1.4.0)
     turbolinks (2.5.3)
       coffee-rails
     tzinfo (1.2.2)
@@ -256,14 +270,18 @@ DEPENDENCIES
   cocoon
   coffee-rails (~> 4.1.0)
   devise
+  docsplit
+  grim
   jbuilder (~> 2.0)
   jquery-rails
   mongoid
   mongoid-grid_fs!
   nprogress-rails
+  pdf-reader
   pry-rails
   rack-mini-profiler
   rails (= 4.2.5.1)
+  rmagick
   rspec-rails
   sass-rails (~> 5.0)
   sdoc (~> 0.4.0)

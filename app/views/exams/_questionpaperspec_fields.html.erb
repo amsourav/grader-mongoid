@@ -2,5 +2,6 @@
 	<%= f.input :tag %>
 	<%= f.input :marks %>
 	<%= f.input :page %>
+	<%= f.collection_select :teacher_id, Teacher.all, :id, :email, :prompt => true	 %>
 	<%= link_to_remove_association "Remove Question", f, class: "btn btn-danger btn-xs" %>
 </div>
