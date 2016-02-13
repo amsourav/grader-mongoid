@@ -6,6 +6,6 @@ class Course
   field :semester, type: String
   field :year, type: String
 
-  belongs_to :teacher
+  belongs_to :teacher, dependent: :destroy
   has_many :exams
 end

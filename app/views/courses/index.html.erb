@@ -18,9 +18,10 @@
         <td><%= course.name %></td>
         <td><%= course.semester %></td>
         <td><%= course.year %></td>
-        <td><%= link_to 'Exams', course_exams_path(course) %></td>
-        <td><%= link_to 'Edit', edit_course_path(course) %></td>
-        <td><%= link_to 'Destroy', course, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <div class="btn-group">
+          <td><%= link_to 'Exams', course_exams_path(course), class: "btn btn-success-outline" %></td>
+          <td><%= link_to 'Edit', edit_course_path(course), class: "btn btn-info-outline" %></td>
+        </div>
       </tr>
     <% end %>
   </tbody>

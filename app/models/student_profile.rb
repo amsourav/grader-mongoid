@@ -5,5 +5,5 @@ class StudentProfile
   field :role, type: String
   field :student_avatar, type: String
 
-  embedded_in :student
+  belongs_to :student
 end

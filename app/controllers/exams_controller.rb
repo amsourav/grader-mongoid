@@ -25,7 +25,11 @@ class ExamsController < ApplicationController
   # POST /exams.json
   def create
     @exam = @course.exams.new(exam_params)
-
+    options = {:user_provided_headers => ["roll", "name", "email"], :headers_in_file => false }
+    student_file = SmarterCSV.process(@exam.student_list.path, options)
+    student_file.each do |chunk|
+      @exam.exam_students << ExamStudent.new(chunk)
+    end
     respond_to do |format|
       if @exam.save
         format.html { redirect_to course_exam_url(@course, @exam), notice: 'Exam was successfully created.' }
@@ -42,6 +46,7 @@ class ExamsController < ApplicationController
   def update
     respond_to do |format|
       if @exam.update(exam_params)
+        puts @exam.student_list.path
         format.html { redirect_to course_exam_url(@course, @exam), notice: 'Exam was successfully updated.' }
         format.json { render :show, status: :ok, location: @exam }
       else
@@ -73,6 +78,6 @@ class ExamsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def exam_params
-      params.require(:exam).permit(:name, :date)
+      params.require(:exam).permit(:name, :date, :student_list, questionpaperspecs_attributes: [:id, :tag, :marks, :page])
     end
 end

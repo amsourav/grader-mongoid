@@ -1,12 +1,64 @@
-<p>
-  <strong>Name:</strong>
-  <%= @exam.name %>
-</p>
+<div class="row">
+  <div class="col-md-6">
+    <p>
+      <strong>Name:</strong>
+      <%= @exam.name %>
+    </p>
 
-<p>
-  <strong>Date:</strong>
-  <%= @exam.date %>
-</p>
+    <p>
+      <strong>Date:</strong>
+      <%= @exam.date %>
+    </p>
+
+    <% @exam.questionpaperspecs.each do |question| %>
+		    <div class="card card-default">
+		      <div class="card-header"><%= "Question" %></div>
+		      <div class="card-block">
+		      	<p>
+		      		<%= question.tag %>
+		      	</p>
+		      	<p>
+		      		<strong>
+		      			Marks:
+		      		</strong>
+		      		<%= question.marks %>
+		      	</p>
+		      	<p>
+		      		<strong>
+		      			Page:
+		      		</strong>
+		      		<%= question.page %>
+		      	</p>
+		      </div>
+		    </div>
+		<% end %>
+  </div>
+
+  <div class="col-md-6">
+    <h2>
+      <center>Students Enrolled</center>
+    </h2>
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>Roll</th>
+          <th>Name</th>
+          <th>Email</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <% @exam.exam_students.each do |student| %>
+          <tr>
+            <td><%= student.roll %></td>
+            <td><%= student.name %></td>
+            <td><%= student.email %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>
 
 <%= link_to 'Edit', edit_course_exam_path(@course, @exam) %> |
 <%= link_to 'Back', course_exams_path(@course) %>

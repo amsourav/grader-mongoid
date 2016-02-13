@@ -5,6 +5,7 @@
     <tr>
       <th>Name</th>
       <th>Date</th>
+      <th>Students Enrolled</th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -14,6 +15,7 @@
       <tr>
         <td><%= exam.name %></td>
         <td><%= exam.date %></td>
+        <td><%= exam.exam_students.length %></td>
         <td><%= link_to 'Show', course_exam_path(@course, exam) %></td>
         <td><%= link_to 'Edit', edit_course_exam_path(@course, exam) %></td>
         <td><%= link_to 'Destroy', course_exam_path(@course, exam), method: :delete, data: { confirm: 'Are you sure?' } %></td>
