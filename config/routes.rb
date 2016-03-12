@@ -1,6 +1,8 @@
+require 'resque/server'
 Rails.application.routes.draw do
   get 'jobs/index'
   root 'jobs#index'
+  mount Resque::Server.new, at: "/resque"
 
   resources :courses do
     resources :exams do
