@@ -13,9 +13,14 @@ class ExamsController < ApplicationController
   def upload_doc_submit
     # @exam.update(upload_doc_submit_params)
     if @exam.update(upload_doc_submit_params)
-      HandleFileConversionJob.perform(@exam.exam_doc.path, @exam.questionpaperspecs.length, @exam.exam_students.length)
+      # HandleFileConversionJob.perform(@exam.exam_doc.path, @exam.questionpaperspecs.length, @exam.exam_students.length)
+      # Resque.enqueue(HandleFileConversionJob.perform(@exam.exam_doc.path, @exam.questionpaperspecs.length, @exam.exam_students.length), :urgent)
       # Resque.enqueue(HandleFileConversionJob, @exam.exam_doc.path)
-      # HandleFileConversionJob.delay.perform(@exam.exam_doc.path)
+      HandleFileConversionJob.perform(@exam.exam_doc.path, @exam.questionpaperspecs, @exam.exam_students, @exam.id)
+
+
+
+
       redirect_to course_exam_path(@course, @exam)
     end
   end

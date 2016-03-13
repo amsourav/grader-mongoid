@@ -35,6 +35,6 @@ class Teacher
   # field :unlock_token,    type: String # Only if unlock strategy is :email or :both
   # field :locked_at,       type: Time
   embeds_one :teacher_profile
-  has_many :courses
-  has_many :questionpaperspecs
+  has_many :courses, dependent: :destroy
+  has_many :questionpaperspecs, dependent: :destroy
 end

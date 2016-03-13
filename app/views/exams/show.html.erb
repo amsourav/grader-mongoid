@@ -10,6 +10,14 @@
       <%= @exam.date %>
     </p>
 
+    <p>
+      <% if !@exam.exam_doc? %>
+        <%= link_to 'Upload Doc', upload_doc_course_exam_path(@course, @exam), class: 'btn btn-danger btn-danger-outline' %>
+      <% else %>
+        <%= link_to 'Done', '#', class: 'btn btn-success' %>
+      <% end %>
+    </p>
+
     <% @exam.questionpaperspecs.each do |question| %>
 		    <div class="card card-default">
 		      <div class="card-header"><%= "Question" %></div>
