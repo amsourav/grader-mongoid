@@ -30,6 +30,7 @@ group :development, :test do
   gem 'bullet'
   gem 'rack-mini-profiler'
   gem 'better_errors'
+  gem "codeclimate-test-reporter", group: :test, require: nil
   gem 'pry-rails'
 end
 
