@@ -1,2 +1,27 @@
-<h1>Jobs#index</h1>
-<p>You currently have no jobs</p>
+<% if current_teacher %>
+	<table class="table table-striped">
+		<thead>
+			<tr>
+				<th>Course</th>
+				<th>Exam</th>
+				<th>Student</th>
+				<th>Question No</th>
+				<th>Marks</th>
+				<th colspan="4"></th>
+			</tr>
+		</thead>
+
+		<tbody>
+			<% @jobs.each do |job| %>
+			<tr>
+				<td><%= job.exam.course.name %></td>
+				<td><%= job.exam.name %></td>
+				<td><%= job.student_name %></td>
+				<td><%= job.question_tag %></td>
+				<td><%= job.max_mark %></td>
+				<td><%= link_to 'Grade', job_grade_path(job), class: 'btn btn-info' %></td>
+			</tr>
+			<% end %>
+		</tbody>
+	</table>
+<% end %>

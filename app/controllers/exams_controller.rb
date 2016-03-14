@@ -1,6 +1,7 @@
 class ExamsController < ApplicationController
   before_action :set_exam, only: [:show, :edit, :update, :destroy, :upload_doc, :upload_doc_submit]
   before_action :set_course
+  before_action :authenticate_teacher!
   # GET /exams
   # GET /exams.json
   def index

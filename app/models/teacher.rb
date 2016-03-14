@@ -37,4 +37,6 @@ class Teacher
   embeds_one :teacher_profile
   has_many :courses, dependent: :destroy
   has_many :questionpaperspecs, dependent: :destroy
+  has_many :jobs
+  has_many :grades
 end

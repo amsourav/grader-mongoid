@@ -1,6 +1,9 @@
 require 'resque/server'
 Rails.application.routes.draw do
-  get 'jobs/index'
+  resources :jobs do 
+    get 'grade'
+    post 'grade_submit'
+  end
   root 'jobs#index'
   mount Resque::Server.new, at: "/resque"
 

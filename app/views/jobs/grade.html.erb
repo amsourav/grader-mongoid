@@ -1,0 +1,23 @@
+<div class="row">
+	<div class="col-md-8">
+		<canvas id="canvas" width="800" height="1050" style="background: url(<%= @job.file.to_s %>); no-repeat; border:1px solid #000000"></canvas>
+	</div>
+
+	<div class="col-md-offset-1 col-md-3">
+	<div class="card card-block">
+		<div class="card-title">
+			<h1 style="text-align: center;"><%= @job.student_name %> </h1>	
+			<h2 style="text-align: center;"><%= @job.student_roll %> </h2>	
+			<h3 style="text-align: center;"><%= @job.question_tag %> </h3>
+		</div>
+		<div class="card-block">
+			<%= simple_form_for(@grade, url: job_grade_submit_path(@job)) do |f| %>
+				<%= f.input :mark, max: @job.max_mark, min: 0 %>
+				<h1 style="text-align: center;"><%= f.label @job.max_mark.to_s %> </h1>	
+				<%= f.input :teacher_id, :input_html => { value: @grade.teacher_id } %>
+				<%= f.input :job_id, :input_html => { value: @grade.job_id } %>
+				<%= f.button :submit,  style: "text-align: center;" %>
+			<% end %>
+		</div>
+	</div>
+</div>

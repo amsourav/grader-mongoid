@@ -13,7 +13,8 @@ class HandleFileConversionJob < ActiveJob::Base
         out_path = File.join(dir,"#{students[i-1].roll}_#{j}.jpg")
         page.render(out_path, dimensions)
 
-        Job.create!(file: out_path, student_roll: students[i-1].roll, student_name: students[i-1].name, teacher_id: qspecs[j-1].teacher_id, exam_id: exam_id)
+        # Job Creation
+        Job.create!(max_mark: qspecs[j-1].marks, page: qspecs[j-1].page, question_tag: qspecs[j-1].tag, file: out_path.split('/public')[1], student_roll: students[i-1].roll, student_name: students[i-1].name, teacher_id: qspecs[j-1].teacher_id, exam_id: exam_id)
 
         var = var + 1
       end
