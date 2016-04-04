@@ -31,6 +31,7 @@ group :development, :test do
   gem 'better_errors'
   gem "codeclimate-test-reporter", group: :test, require: nil
   gem 'pry-rails'
+  gem 'thin'
 end
 
 group :development do

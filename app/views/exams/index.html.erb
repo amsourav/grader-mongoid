@@ -5,9 +5,6 @@
     <tr>
       <th>Name</th>
       <th>Date</th>
-      <th>Students Enrolled</th>
-      <th>Total Marks</th>
-      <th>Total Pages </th>
       <th colspan="4"></th>
     </tr>
   </thead>
@@ -17,9 +14,6 @@
       <tr>
         <td><%= exam.name %></td>
         <td><%= exam.date %></td>
-        <td><%= exam.exam_students.length %></td>
-        <td><%= exam.total_marks %></td>
-        <td><%= exam.total_pages %></td>
         <td>
           <% if !exam.exam_doc? %>
             <%= link_to 'Upload Doc', upload_doc_course_exam_path(@course, exam), class: 'btn btn-danger btn-danger-outline' %>

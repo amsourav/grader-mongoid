@@ -1,5 +1,5 @@
 class CoursesController < ApplicationController
-  before_action :set_course, only: [:show, :edit, :update, :destroy]
+  before_action :set_course, only: [:show, :edit, :update, :destroy, :upload_student_roster, :student_roster]
   before_action :authenticate_teacher!
   # GET /courses
   # GET /courses.json
@@ -61,6 +61,23 @@ class CoursesController < ApplicationController
     end
   end
 
+  # GET /courses/:id/student_roster
+  def student_roster
+    @student_roster = StudentRoster.new
+  end
+
+  # POST /courses/:id/upload_student_roster
+
+  def upload_student_roster
+    @student_roster = StudentRoster.new(upload_student_roster_params)
+    if @student_roster.save
+      RegisterStudentToCourseJob.perform_now(@student_roster.student_list.path, @course)
+      respond_to do |format|
+        format.html { redirect_to courses_url }
+      end
+    end
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_course
@@ -70,5 +87,9 @@ class CoursesController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def course_params
       params.require(:course).permit(:code, :name, :semester, :year)
+    end
+
+    def upload_student_roster_params
+      params.require(:student_roster).permit(:student_list)
     end
 end

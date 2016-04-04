@@ -5,13 +5,12 @@
       <div class="col-md-4">
         <%= f.input :name %>
         <%= f.input :date %>
-        <%= f.file_field :student_list, class: "btn btn-default btn-file" %>
 
         <div class="form-actions">
           <%= f.button :submit %>
         </div>
 
-        
+
       </div>
       <div class="col-md-offset-1 col-md-7">
         <% f.simple_fields_for :questionpaperspecs, :html => { :class => 'form-horizontal' } do |questionpaperspec| %>

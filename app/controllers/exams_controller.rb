@@ -18,10 +18,6 @@ class ExamsController < ApplicationController
       # Resque.enqueue(HandleFileConversionJob.perform(@exam.exam_doc.path, @exam.questionpaperspecs.length, @exam.exam_students.length), :urgent)
       # Resque.enqueue(HandleFileConversionJob, @exam.exam_doc.path)
       HandleFileConversionJob.perform(@exam.exam_doc.path, @exam.questionpaperspecs, @exam.exam_students, @exam.id)
-
-
-
-
       redirect_to course_exam_path(@course, @exam)
     end
   end
@@ -44,16 +40,8 @@ class ExamsController < ApplicationController
   # POST /exams.json
   def create
     @exam = @course.exams.new(exam_params)
-    options = {:user_provided_headers => ["roll", "name", "email"], :headers_in_file => false }
-    student_file = SmarterCSV.process(@exam.student_list.path, options)
-    student_file.each do |chunk|
-      @exam.exam_students << ExamStudent.new(chunk)
-    end
     respond_to do |format|
       if @exam.save
-        @exam.total_marks = @exam.questionpaperspecs.sum(:marks)
-        @exam.total_pages = @exam.exam_students.length * @exam.questionpaperspecs.length
-        @exam.save
         format.html { redirect_to course_exam_url(@course, @exam), notice: 'Exam was successfully created.' }
         format.json { render :show, status: :created, location: @exam }
       else
@@ -68,7 +56,6 @@ class ExamsController < ApplicationController
   def update
     respond_to do |format|
       if @exam.update(exam_params)
-        puts @exam.student_list.path
         format.html { redirect_to course_exam_url(@course, @exam), notice: 'Exam was successfully updated.' }
         format.json { render :show, status: :ok, location: @exam }
       else
@@ -100,7 +87,7 @@ class ExamsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def exam_params
-      params.require(:exam).permit(:name, :date, :student_list, questionpaperspecs_attributes: [:id, :tag, :marks, :page, :teacher_id, :_destroy])
+      params.require(:exam).permit(:name, :date, questionpaperspecs_attributes: [:id, :tag, :marks, :page, :teacher_id, :_destroy])
     end
 
     def upload_doc_submit_params

@@ -1,6 +1,6 @@
 require 'resque/server'
 Rails.application.routes.draw do
-  resources :jobs do 
+  resources :jobs do
     get 'grade'
     post 'grade_submit'
   end
@@ -8,6 +8,11 @@ Rails.application.routes.draw do
   mount Resque::Server.new, at: "/resque"
 
   resources :courses do
+    member do
+      get 'student_roster'
+      post 'upload_student_roster'
+    end
+    
     resources :exams do
       member do
         get 'upload_doc'

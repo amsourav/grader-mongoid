@@ -24,6 +24,11 @@ class Student
   field :current_sign_in_ip, type: String
   field :last_sign_in_ip,    type: String
 
+
+  field :roll, type: String
+  field :name, type: String
+
+  has_and_belongs_to_many :courses
   ## Confirmable
   # field :confirmation_token,   type: String
   # field :confirmed_at,         type: Time
@@ -34,5 +39,4 @@ class Student
   # field :failed_attempts, type: Integer, default: 0 # Only if lock strategy is :failed_attempts
   # field :unlock_token,    type: String # Only if unlock strategy is :email or :both
   # field :locked_at,       type: Time
-  has_one :student_profile
 end

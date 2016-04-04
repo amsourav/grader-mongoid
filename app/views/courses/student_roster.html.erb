@@ -1,0 +1,32 @@
+<div class="col-md-34">
+  <%=  simple_form_for(@student_roster, url: upload_student_roster_course_path(@course)) do |f| %>
+    <%= f.file_field :student_list %>
+    <%= f.submit %>
+  <% end %>
+</div>
+
+<br>
+
+<div>
+  <h2 style="text-align: center;">Student Registered</h2>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>Roll</th>
+        <th>Name</th>
+        <th>Email</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% @course.students.each do |student| %>
+        <tr>
+          <td><%= student.roll %></td>
+          <td><%= student.name %></td>
+          <td><%= student.email %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+
+</div>
