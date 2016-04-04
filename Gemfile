@@ -2,7 +2,7 @@ source 'https://rubygems.org'
 
 gem 'mongoid'
 gem 'devise'
-gem 'thin'
+gem "passenger", ">= 5.0.25", require: "phusion_passenger/rack_handler"
 gem 'simple_form'
 gem 'bootstrap', '~> 4.0.0.alpha3'
 gem 'carrierwave-mongoid', :require => 'carrierwave/mongoid'
@@ -10,7 +10,6 @@ gem 'smarter_csv'
 gem 'cocoon'
 gem 'pdfshaver'
 
-gem 'delayed_job_mongoid'
 gem 'sidekiq'
 gem 'daemons'
 gem 'resque'
