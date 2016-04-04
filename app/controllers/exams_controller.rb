@@ -1,5 +1,5 @@
 class ExamsController < ApplicationController
-  before_action :set_exam, only: [:show, :edit, :update, :destroy, :upload_doc, :upload_doc_submit]
+  before_action :set_exam, only: [:show, :edit, :update, :destroy, :upload_doc, :upload_doc_submit, :attendance_sheet, :upload_attendance_sheet]
   before_action :set_course
   before_action :authenticate_teacher!
   # GET /exams
@@ -17,7 +17,7 @@ class ExamsController < ApplicationController
       # HandleFileConversionJob.perform(@exam.exam_doc.path, @exam.questionpaperspecs.length, @exam.exam_students.length)
       # Resque.enqueue(HandleFileConversionJob.perform(@exam.exam_doc.path, @exam.questionpaperspecs.length, @exam.exam_students.length), :urgent)
       # Resque.enqueue(HandleFileConversionJob, @exam.exam_doc.path)
-      HandleFileConversionJob.perform(@exam.exam_doc.path, @exam.questionpaperspecs, @exam.exam_students, @exam.id)
+      HandleFileConversionJob.perform_now(@exam.exam_doc.path, @exam.questionpaperspecs, @exam.exam_students, @exam.id)
       redirect_to course_exam_path(@course, @exam)
     end
   end
@@ -75,6 +75,14 @@ class ExamsController < ApplicationController
     end
   end
 
+  def attendance_sheet
+    @asheet = @exam.build_attendance_sheet
+  end
+
+  def upload_attendance_sheet
+    @asheet = @exam.build_attendance_sheet(upload_attendance_sheet_params)
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_exam
@@ -92,5 +100,9 @@ class ExamsController < ApplicationController
 
     def upload_doc_submit_params
       params.require(:exam).permit(:exam_doc)
+    end
+
+    def upload_attendance_sheet_params
+      params.require(:attendance_sheet).permit(:file)
     end
 end

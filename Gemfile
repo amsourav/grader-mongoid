@@ -32,6 +32,8 @@ group :development, :test do
   gem "codeclimate-test-reporter", group: :test, require: nil
   gem 'pry-rails'
   gem 'thin'
+  gem 'lograge'
+  gem 'factory_girl_rails'
 end
 
 group :development do

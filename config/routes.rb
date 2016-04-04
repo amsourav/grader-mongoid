@@ -1,10 +1,12 @@
 require 'resque/server'
 Rails.application.routes.draw do
+  get 'grades/show'
+
   resources :jobs do
     get 'grade'
     post 'grade_submit'
   end
-  root 'jobs#index'
+
   mount Resque::Server.new, at: "/resque"
 
   resources :courses do
@@ -12,11 +14,13 @@ Rails.application.routes.draw do
       get 'student_roster'
       post 'upload_student_roster'
     end
-    
+
     resources :exams do
       member do
         get 'upload_doc'
+        get 'attendance_sheet'
         patch 'upload_doc_submit'
+        post 'upload_attendance_sheet'
       end
     end
   end
@@ -27,8 +31,7 @@ Rails.application.routes.draw do
   # See how all your routes lay out with "rake routes".
 
   # You can have the root of your site routed with "root"
-  # root 'welcome#index'
-
+  root 'home#index'
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 
