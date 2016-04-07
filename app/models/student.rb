@@ -29,6 +29,10 @@ class Student
   field :name, type: String
 
   has_and_belongs_to_many :courses
+  
+  has_one :job
+
+
   ## Confirmable
   # field :confirmation_token,   type: String
   # field :confirmed_at,         type: Time

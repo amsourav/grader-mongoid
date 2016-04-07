@@ -19,7 +19,7 @@ Rails.application.routes.draw do
       member do
         get 'upload_doc'
         get 'attendance_sheet'
-        patch 'upload_doc_submit'
+        post 'upload_doc_submit'
         post 'upload_attendance_sheet'
       end
     end

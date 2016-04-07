@@ -11,6 +11,11 @@
     </p>
 
     <p>
+      <strong>Page Size: </strong>
+      <%= @exam.page_size %>
+    </p>
+
+    <p>
       <% if !@exam.exam_doc? %>
         <%= link_to 'Upload Doc', upload_doc_course_exam_path(@course, @exam), class: 'btn btn-danger btn-danger-outline' %>
       <% else %>
@@ -35,7 +40,7 @@
 		      	</p>
 		      	<p>
 		      		<strong>
-		      			Page:
+		      			Alloted Pages:
 		      		</strong>
 		      		<%= question.page %>
 		      	</p>

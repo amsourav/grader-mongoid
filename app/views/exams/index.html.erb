@@ -1,5 +1,5 @@
 <h1>Listing Exams</h1>
-
+<h2 style="text-align: right;"> Students Enrolled: <%= @course.students.count %></h2>
 <table class="table table-striped">
   <thead>
     <tr>
@@ -14,9 +14,6 @@
       <tr>
         <td><%= exam.name %></td>
         <td><%= exam.date %></td>
-        <td>
-          <%= link_to 'Attendance Sheet', attendance_sheet_course_exam_path(@course, exam), class: "btn btn-danger-outline" %>
-        </td>
         <td>
           <% if !exam.exam_doc? %>
             <%= link_to 'Upload Doc', upload_doc_course_exam_path(@course, exam), class: 'btn btn-danger btn-danger-outline' %>

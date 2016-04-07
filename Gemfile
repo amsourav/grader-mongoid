@@ -2,7 +2,9 @@ source 'https://rubygems.org'
 
 gem 'mongoid'
 gem 'devise'
-gem "passenger", ">= 5.0.25", require: "phusion_passenger/rack_handler"
+gem 'thin'
+
+# gem "passenger", ">= 5.0.25", require: "phusion_passenger/rack_handler"
 gem 'simple_form'
 gem 'bootstrap', '~> 4.0.0.alpha3'
 gem 'carrierwave-mongoid', :require => 'carrierwave/mongoid'
@@ -31,7 +33,6 @@ group :development, :test do
   gem 'better_errors'
   gem "codeclimate-test-reporter", group: :test, require: nil
   gem 'pry-rails'
-  gem 'thin'
   gem 'lograge'
   gem 'factory_girl_rails'
 end

@@ -9,15 +9,17 @@ class ExamsController < ApplicationController
   end
 
   def upload_doc
+    @doc = @exam.build_exam_doc
   end
 
   def upload_doc_submit
+    @doc = @exam.build_exam_doc(upload_doc_submit_params)
     # @exam.update(upload_doc_submit_params)
-    if @exam.update(upload_doc_submit_params)
+    if @doc.save
       # HandleFileConversionJob.perform(@exam.exam_doc.path, @exam.questionpaperspecs.length, @exam.exam_students.length)
       # Resque.enqueue(HandleFileConversionJob.perform(@exam.exam_doc.path, @exam.questionpaperspecs.length, @exam.exam_students.length), :urgent)
       # Resque.enqueue(HandleFileConversionJob, @exam.exam_doc.path)
-      HandleFileConversionJob.perform_now(@exam.exam_doc.path, @exam.questionpaperspecs, @exam.exam_students, @exam.id)
+      HandleFileConversionJob.perform(@doc, @course, @exam)
       redirect_to course_exam_path(@course, @exam)
     end
   end
@@ -40,6 +42,11 @@ class ExamsController < ApplicationController
   # POST /exams.json
   def create
     @exam = @course.exams.new(exam_params)
+    doc_size = 0
+    @exam.questionpaperspecs.each do |qp|
+      doc_size = doc_size + qp.page
+    end
+    @exam.page_size = doc_size * @course.students.size
     respond_to do |format|
       if @exam.save
         format.html { redirect_to course_exam_url(@course, @exam), notice: 'Exam was successfully created.' }
@@ -81,6 +88,9 @@ class ExamsController < ApplicationController
 
   def upload_attendance_sheet
     @asheet = @exam.build_attendance_sheet(upload_attendance_sheet_params)
+    if @asheet.save
+      redirect_to course_exams_url(@course)
+    end
   end
 
   private
@@ -99,7 +109,7 @@ class ExamsController < ApplicationController
     end
 
     def upload_doc_submit_params
-      params.require(:exam).permit(:exam_doc)
+      params.require(:exam_doc).permit(:file)
     end
 
     def upload_attendance_sheet_params
