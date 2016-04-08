@@ -18,7 +18,7 @@ Bundler.require(*Rails.groups)
 module Grader
   class Application < Rails::Application
     Mongoid.raise_not_found_error = false
-    config.lograge.enabled = true
+    # config.lograge.enabled = true
     config.active_job.queue_adapter = :sidekiq
   end
 end

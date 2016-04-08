@@ -1,4 +1,3 @@
-require 'resque/server'
 Rails.application.routes.draw do
   get 'grades/show'
 
@@ -7,14 +6,7 @@ Rails.application.routes.draw do
     post 'grade_submit'
   end
 
-  mount Resque::Server.new, at: "/resque"
-
   resources :courses do
-    member do
-      get 'student_roster'
-      post 'upload_student_roster'
-    end
-
     resources :exams do
       member do
         get 'upload_doc'
@@ -22,6 +14,11 @@ Rails.application.routes.draw do
         post 'upload_doc_submit'
         post 'upload_attendance_sheet'
       end
+    end
+
+    member do
+      get 'student_roster'
+      post 'upload_student_roster'
     end
   end
   devise_for :students

@@ -108,10 +108,6 @@ GEM
       thor (>= 0.14, < 2.0)
     json (1.8.3)
     libv8 (3.16.14.13)
-    lograge (0.3.6)
-      actionpack (>= 3)
-      activesupport (>= 3)
-      railties (>= 3)
     loofah (2.0.3)
       nokogiri (>= 1.5.9)
     mail (2.6.4)
@@ -132,6 +128,7 @@ GEM
       mongoid (>= 3.0, < 6.0)
     mono_logger (1.1.0)
     multi_json (1.11.2)
+    newrelic_rpm (3.15.1.316)
     nokogiri (1.6.7.2)
       mini_portile2 (~> 2.0.0.rc2)
     origin (2.2.0)
@@ -284,8 +281,8 @@ DEPENDENCIES
   factory_girl_rails
   jbuilder (~> 2.0)
   jquery-rails
-  lograge
   mongoid
+  newrelic_rpm
   pdfshaver
   pry-rails
   rack-mini-profiler

@@ -10,5 +10,4 @@ class Job
   belongs_to :teacher
   belongs_to :exam
   belongs_to :student
-  has_one :grade
 end

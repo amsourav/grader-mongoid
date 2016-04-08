@@ -13,5 +13,6 @@
 //= require jquery
 //= require jquery_ujs
 //= require bootstrap
+//= require jasny-bootstrap
 //= require cocoon
 //= require_tree .

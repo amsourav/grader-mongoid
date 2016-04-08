@@ -3,6 +3,7 @@ source 'https://rubygems.org'
 gem 'mongoid'
 gem 'devise'
 gem 'thin'
+gem 'newrelic_rpm'
 
 # gem "passenger", ">= 5.0.25", require: "phusion_passenger/rack_handler"
 gem 'simple_form'
@@ -33,7 +34,7 @@ group :development, :test do
   gem 'better_errors'
   gem "codeclimate-test-reporter", group: :test, require: nil
   gem 'pry-rails'
-  gem 'lograge'
+  # gem 'lograge'
   gem 'factory_girl_rails'
 end
 

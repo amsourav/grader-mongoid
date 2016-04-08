@@ -63,13 +63,13 @@ class CoursesController < ApplicationController
 
   # GET /courses/:id/student_roster
   def student_roster
-    @student_roster = StudentRoster.new
+    @student_roster = @course.build_student_roster
   end
 
   # POST /courses/:id/upload_student_roster
 
   def upload_student_roster
-    @student_roster = StudentRoster.new(upload_student_roster_params)
+    @student_roster = @course.build_student_roster(upload_student_roster_params)
     if @student_roster.save
       RegisterStudentToCourseJob.perform_now(@student_roster.student_list.path, @course)
       respond_to do |format|
