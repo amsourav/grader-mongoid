@@ -6,7 +6,10 @@ class RegisterStudentToCourseJob < ActiveJob::Base
     student_file = SmarterCSV.process(file_path, options)
     student_file.each do |student|
       # USE ROLL
-      @student = Student.find_by(email: student[:email]) || Student.create!(name: student[:name], roll: student[:roll], email: student[:email], password: "password")
+      @student = Student.find_by(email: student[:email]) || Student.create!(name: student[:name], 
+                                                                            roll: student[:roll], 
+                                                                            email: student[:email], 
+                                                                            password: "password")
       course.students << @student
     end
   end
