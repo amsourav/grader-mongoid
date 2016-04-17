@@ -8,6 +8,7 @@ gem 'newrelic_rpm'
 # gem "passenger", ">= 5.0.25", require: "phusion_passenger/rack_handler"
 gem 'simple_form'
 gem 'bootstrap', '~> 4.0.0.alpha3'
+gem 'octicons-rails'
 gem 'carrierwave-mongoid', :require => 'carrierwave/mongoid'
 gem 'smarter_csv'
 gem 'cocoon'

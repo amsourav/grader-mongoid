@@ -1,10 +1,10 @@
 class JobsController < ApplicationController
   before_action :authenticate_teacher!
   before_action :set_job, except: [:grade, :grade_submit, :index]
+  before_action :set_jobs, only: [:index, :grade_submit]
   before_action :set_grade_job, only: [:grade, :grade_submit]
 
   def index
-  	@jobs = current_teacher.jobs
   end
 
   def show
@@ -14,14 +14,16 @@ class JobsController < ApplicationController
   end
 
   def grade
-    @grade = @job.build_grade
-    @grade.teacher_id = current_teacher.id
+    if current_teacher.id == @job.teacher.id
+      @grade = @job.build_grade
+      @grade.teacher_id = @job.teacher.id
+    end
   end
 
   def grade_submit
     @grade = Grade.new(grade_submit_params) 
     if @grade.save
-      redirect_to @job
+      redirect_to job_grade_path(@job.next)
     end  
   end
 
@@ -41,6 +43,10 @@ class JobsController < ApplicationController
 
   def set_grade_job
     @job = Job.find(params[:job_id])
+  end
+
+  def set_jobs
+    @jobs = current_teacher.jobs
   end
 
 end

@@ -8,6 +8,9 @@
       <li class="nav-item">
         <%= link_to 'Courses', courses_path, class: "nav-link" %>
       </li>
+      <li class="nav-item">
+        <%= link_to 'Jobs', jobs_path, class: "nav-link" %>
+      </li>
     <% end %>
     <li class="nav-item">
       <a class="nav-link" href="#">About</a>
@@ -16,9 +19,9 @@
   <form class="form-inline pull-xs-right">
     <div class="btn-group">
       <% if current_teacher %>
-        <%= link_to 'Sign Out!', destroy_teacher_session_path, method: :delete, class: "btn btn-danger-outline" %>
+        <%= link_to 'Sign Out', destroy_teacher_session_path, method: :delete, class: "btn btn-danger-outline" %>
       <% elsif current_student %>
-        <%= link_to 'Sign Out!', destroy_student_session_path, method: :delete, class: "btn btn-danger-outline" %>
+        <%= link_to 'Sign Out', destroy_student_session_path, method: :delete, class: "btn btn-danger-outline" %>
       <% else %>
         <%= link_to 'Login As', '#', class: "btn" %>
         <%= link_to 'Teacher', new_teacher_session_path, class: "btn btn-success-outline" %>

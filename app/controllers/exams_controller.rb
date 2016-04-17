@@ -27,6 +27,8 @@ class ExamsController < ApplicationController
   # GET /exams/1
   # GET /exams/1.json
   def show
+    @total_exam_jobs = @exam.jobs
+    @teacher_exam_jobs = @total_exam_jobs.where(:teacher_id => current_teacher.id) 
   end
 
   # GET /exams/new

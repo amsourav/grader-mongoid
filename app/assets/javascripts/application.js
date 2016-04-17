@@ -14,5 +14,6 @@
 //= require jquery_ujs
 //= require bootstrap
 //= require jasny-bootstrap
+//= require atrament.min
 //= require cocoon
 //= require_tree .

@@ -7,4 +7,5 @@ class Questionpaperspec
 
   belongs_to :exam
   belongs_to :teacher
+  has_one :job
 end

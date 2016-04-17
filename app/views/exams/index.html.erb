@@ -18,7 +18,7 @@
           <% if !exam.exam_doc? %>
             <%= link_to 'Upload Doc', upload_doc_course_exam_path(@course, exam), class: 'btn btn-danger btn-danger-outline' %>
           <% else %>
-            <%= link_to 'Done', '#', class: 'btn btn-success' %>
+            <%= link_to 'Doc Uploaded', '#', class: 'btn btn-success' %>
           <% end %>
         </td>
         <td><%= link_to 'Show', course_exam_path(@course, exam) %></td>

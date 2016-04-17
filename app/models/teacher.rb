@@ -38,4 +38,5 @@ class Teacher
   has_many :courses, dependent: :destroy
   has_many :questionpaperspecs, dependent: :destroy
   has_many :jobs
+  has_many :grades
 end

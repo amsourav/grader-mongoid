@@ -6,9 +6,19 @@
 	<div class="col-md-offset-1 col-md-3">
 		<div class="card card-block">
 		<div class="card-title">
-			<h1 style="text-align: center;"><%= @job.student_name %> </h1>	
-			<h2 style="text-align: center;"><%= @job.student_roll %> </h2>	
-			<h3 style="text-align: center;"><%= @job.question_tag %> </h3>
+			<h3 style="text-align: center;"><%= @job.student.name %> </h3>	
+			<h5 style="text-align: center;"> 
+				<% if @job.previous(current_teacher.id).present? %>
+					<a href="<%= job_grade_path(@job.previous(current_teacher.id))  %>">
+					<span class="mega-octicon really-more-mega octicon-arrow-left" style="float: left;"></span></a>
+				<% end %>
+					<%= @job.student.roll %>
+				<% if @job.next(current_teacher.id).present? %>
+					<a href="<%=job_grade_path(@job.next(current_teacher.id)) %>">
+					<span class="mega-octicon really-more-mega octicon-arrow-right" style="float: right;"></span></a>
+				<% end %>
+			</h5>
+			<h4 style="text-align: center;"><%= @job.questionpaperspec.tag %> </h4>
 		</div>
 		<div class="card-block">
 			<p>Mark: <%= @job.grade.mark %></p>

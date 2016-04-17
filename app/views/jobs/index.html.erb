@@ -16,10 +16,14 @@
 			<tr>
 				<td><%= job.exam.course.name %></td>
 				<td><%= job.exam.name %></td>
-				<td><%= job.student_name %></td>
-				<td><%= job.question_tag %></td>
-				<td><%= job.max_mark %></td>
-				<td><%= link_to 'Grade', job_grade_path(job), class: 'btn btn-info' %></td>
+				<td><%= job.student.name %></td>
+				<td><%= job.questionpaperspec.tag %></td>
+				<td><%= job.questionpaperspec.marks %></td>
+				<% if job.grade? %>
+					<td><%= link_to 'Graded', job, class: 'btn btn-danger' %></td>
+				<% else %>
+					<td><%= link_to 'Grade', job_grade_path(job), class: 'btn btn-info' %></td>
+				<% end %>
 			</tr>
 			<% end %>
 		</tbody>
