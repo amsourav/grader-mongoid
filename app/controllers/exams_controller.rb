@@ -28,7 +28,20 @@ class ExamsController < ApplicationController
   # GET /exams/1.json
   def show
     @total_exam_jobs = @exam.jobs
-    @teacher_exam_jobs = @total_exam_jobs.where(:teacher_id => current_teacher.id) 
+    @teacher_exam_jobs = @total_exam_jobs.where(:teacher_id => current_teacher.id)
+    @complete_total_exam_jobs = 0
+    @complete_teacher_exam_jobs = 0
+    @total_exam_jobs.each do |f|
+      if f.grade?
+        @complete_total_exam_jobs = @complete_total_exam_jobs + 1
+      end
+    end
+
+    @teacher_exam_jobs.each do |f|
+      if f.grade?
+        @complete_teacher_exam_jobs = @complete_teacher_exam_jobs + 1
+      end
+    end
   end
 
   # GET /exams/new

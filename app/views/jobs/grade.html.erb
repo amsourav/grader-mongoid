@@ -24,22 +24,35 @@
 		
 		<div class="card-block">
 			<%= simple_form_for(@grade, url: job_grade_submit_path(@job)) do |f| %>
-				<%= f.input :mark, max: @job.questionpaperspec.marks, min: 0 %>
+				<%= f.error_notification %>
+				<%= f.input :mark, input_html: { type: 'number', max: @job.questionpaperspec.marks, min: 0 } %>
 				<h1 style="text-align: center;"><%= f.label @job.questionpaperspec.marks.to_s %> </h1>	
 				<%= f.input :teacher_id, as: :hidden, :input_html => { value: @grade.teacher_id } %>
 				<%= f.input :job_id, as: :hidden, :input_html => { value: @grade.job_id } %>
-				<%= f.button :submit,  style: "text-align: center;" %>
-			<% end %>
-		</div>
-
-		<div class="card-block">
-			<%= simple_form_for(@grade, url: job_grade_submit_path(@job)) do |f| %>
-				<%= f.input :mark, max: @job.questionpaperspec.marks, min: 0 %>
-				<h1 style="text-align: center;"><%= f.label @job.questionpaperspec.marks.to_s %> </h1>	
-				<%= f.input :teacher_id, as: :hidden, :input_html => { value: @grade.teacher_id } %>
-				<%= f.input :job_id, as: :hidden, :input_html => { value: @grade.job_id } %>
-				<%= f.button :submit,  style: "text-align: center;" %>
+				<div class="actions">
+					<%= f.button :submit,  style: "text-align: center;", disabled: 'disabled' %>
+				</div>
 			<% end %>
 		</div>
 	</div>
 </div>
+
+<script type="text/javascript">
+	$(document).ready(function() {
+    $('#grade_mark').keyup(function() {
+
+        var empty = false;
+        $('#grade_mark').each(function() {
+            if ($(this).val() > <%= @job.questionpaperspec.marks %>) {
+                empty = true;
+            }
+        });
+
+        if (empty) {
+            $('.actions input').attr('disabled', 'disabled');
+        } else {
+            $('.actions input').attr('disabled', false);
+        }
+    });
+});
+</script>

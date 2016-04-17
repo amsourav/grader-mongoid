@@ -29,7 +29,10 @@
       </div>
 
       <div class="card-block">
-        
+        Total Jobs: <%= @total_exam_jobs.count %><br>
+        My Jobs: <%= @teacher_exam_jobs.count %><br>
+        Total Jobs left: <%= @total_exam_jobs.count - @complete_total_exam_jobs %><br>
+        My Jobs left: <%= @teacher_exam_jobs.count - @complete_teacher_exam_jobs %>
       </div>
     </div>
 

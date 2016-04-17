@@ -8,12 +8,19 @@ class JobsController < ApplicationController
   end
 
   def show
+    if !@job.grade?
+      redirect_to job_grade_path(@job)
+    end
   end
 
   def new
   end
 
   def grade
+    if @job.grade?
+      redirect_to job_path(@job)
+    end
+
     if current_teacher.id == @job.teacher.id
       @grade = @job.build_grade
       @grade.teacher_id = @job.teacher.id
@@ -23,7 +30,7 @@ class JobsController < ApplicationController
   def grade_submit
     @grade = Grade.new(grade_submit_params) 
     if @grade.save
-      redirect_to job_grade_path(@job.next)
+      redirect_to job_grade_path(@job.next(current_teacher.id))
     end  
   end
 

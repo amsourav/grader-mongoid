@@ -1,6 +1,5 @@
 Rails.application.routes.draw do
   resources :grades
-  get 'grades/show'
 
   resources :jobs do
     get 'grade'
@@ -20,6 +19,7 @@ Rails.application.routes.draw do
     member do
       get 'student_roster'
       post 'upload_student_roster'
+      post 'add_teacher'
     end
   end
   devise_for :students

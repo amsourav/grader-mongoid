@@ -3,6 +3,7 @@ class Grade
   include Mongoid::Timestamps
 
   field :mark, type: Integer
+  validates :mark, presence: true
   belongs_to :job
   belongs_to :teacher
 

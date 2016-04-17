@@ -30,7 +30,7 @@ class Student
 
   has_and_belongs_to_many :courses
   
-  has_one :job
+  has_many :jobs
 
 
   ## Confirmable
