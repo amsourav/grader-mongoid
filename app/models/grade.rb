@@ -6,5 +6,4 @@ class Grade
   validates :mark, presence: true
   belongs_to :job
   belongs_to :teacher
-
 end

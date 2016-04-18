@@ -17,7 +17,7 @@ class HandleFileConversionJob < ActiveJob::Base
       for j in 1..no_of_ques
         page = portrait_pages[var]
         dimensions = page.extract_dimensions_from_gm_geometry_string('800x')
-        out_path = File.join(dir,"#{students[i-1].roll}_#{j}.jpg")
+        out_path = File.join(dir,"#{j}_#{students[i-1].roll}.jpg")
         page.render(out_path, dimensions)
         # # Job Creation
         #  Job.create!(max_mark: qspecs[j-1].marks, 

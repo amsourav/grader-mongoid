@@ -4,6 +4,10 @@ class JobsController < ApplicationController
   before_action :set_jobs, only: [:index, :grade_submit]
   before_action :set_grade_job, only: [:grade, :grade_submit]
 
+
+  def home
+  end
+
   def index
   end
 
@@ -53,7 +57,7 @@ class JobsController < ApplicationController
   end
 
   def set_jobs
-    @jobs = current_teacher.jobs
+    @jobs = current_teacher.jobs.order_by(:file => 'asce' )
   end
 
 end

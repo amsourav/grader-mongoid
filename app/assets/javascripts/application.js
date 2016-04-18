@@ -12,8 +12,11 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require turbolinks
 //= require bootstrap
 //= require jasny-bootstrap
 //= require atrament.min
+//= require mousetrap.min
+//= require mark
 //= require cocoon
 //= require_tree .

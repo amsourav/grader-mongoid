@@ -1,9 +1,9 @@
 Rails.application.routes.draw do
-  resources :grades
 
   resources :jobs do
     get 'grade'
     post 'grade_submit'
+    get 'home'
   end
 
   resources :courses do

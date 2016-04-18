@@ -1,5 +1,6 @@
 class CoursesController < ApplicationController
-  before_action :set_course, only: [:show, :edit, :update, :destroy, :upload_student_roster, :student_roster]
+  before_action :set_course, only: [:show, :edit, :update, :destroy, 
+                                :upload_student_roster, :student_roster, :grade ]
   before_action :authenticate_teacher!
   # GET /courses
   # GET /courses.json
