@@ -1,15 +1,19 @@
 class GradesController < ApplicationController
   before_action :set_grade, only: [:show, :edit, :update, :destroy]
-  before_action :authenticate_teacher!
+  before_action :authenticate_student!
   # GET /grades
   # GET /grades.json
   def index
-    @grades = Grade.all
+    @grades = current_student.grades
+    # respond_to do |format|
+    #   format.json { @grades.to_json }
+    # end
   end
 
   # GET /grades/1
   # GET /grades/1.json
   def show
+    @job = @grade.job
   end
 
   # GET /grades/new

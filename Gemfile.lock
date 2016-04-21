@@ -91,6 +91,7 @@ GEM
     erubis (2.7.0)
     eventmachine (1.2.0.1)
     execjs (2.6.0)
+    fabric-rails (1.2.1)
     factory_girl (4.5.0)
       activesupport (>= 3.0.0)
     factory_girl_rails (4.6.0)
@@ -282,6 +283,7 @@ DEPENDENCIES
   coffee-rails (~> 4.1.0)
   daemons
   devise
+  fabric-rails
   factory_girl_rails
   jbuilder (~> 2.0)
   jquery-rails

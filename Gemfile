@@ -13,6 +13,7 @@ gem 'carrierwave-mongoid', :require => 'carrierwave/mongoid'
 gem 'smarter_csv'
 gem 'cocoon'
 gem 'pdfshaver'
+gem 'fabric-rails'
 
 gem 'sidekiq'
 gem 'daemons'

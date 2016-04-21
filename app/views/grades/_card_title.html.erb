@@ -1,0 +1,17 @@
+<h5 style="text-align: center;font-weight: bold;text-transform: capitalize;"><%= @job.student.name %> </h5>	
+</h5> 	
+<h4 style="text-align: center;"><%= @job.questionpaperspec.tag %> </h4>
+
+<script type="text/javascript">
+	$(document).ready(function(){
+		Mousetrap.bind('right', function(){
+	    	$('#js-right')[0].click();
+		});
+	    
+	    Mousetrap.bind('left', function(){
+	    	$('#js-left')[0].click();
+	    });
+
+	   
+	})
+</script>

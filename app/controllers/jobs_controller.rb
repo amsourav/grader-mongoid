@@ -28,6 +28,7 @@ class JobsController < ApplicationController
     if current_teacher.id == @job.teacher.id
       @grade = @job.build_grade
       @grade.teacher_id = @job.teacher.id
+      @grade.student_id = @job.student.id
     end
   end
 
@@ -45,7 +46,8 @@ class JobsController < ApplicationController
   private
 
   def grade_submit_params
-    params.require(:grade).permit(:mark, :teacher_id, :job_id)
+    params.require(:grade).permit(:mark, :teacher_id, :job_id, 
+                                      :annotation, :student_id, :comment)
   end
 
   def set_job

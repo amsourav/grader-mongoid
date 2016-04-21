@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+  resources :grades
   resources :jobs do
     get 'grade'
     post 'grade_submit'
@@ -11,6 +12,8 @@ Rails.application.routes.draw do
       member do
         get 'upload_doc'
         get 'attendance_sheet'
+        get 'see_grade'
+        get 'publish_grade'
         post 'upload_doc_submit'
         post 'upload_attendance_sheet'
       end

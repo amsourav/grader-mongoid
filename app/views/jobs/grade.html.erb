@@ -1,6 +1,17 @@
 <div class="row">
 	<div class="col-md-8">
-		<canvas id="pagesketch_viewport" width="800" height="1050" style="background: url(<%= @job.file.to_s %>); no-repeat; border:1px solid #000000"></canvas>
+	<input type="button" value="Clear Screen" id="clearBtn" class="btn btn-danger btn-xs"  > | 
+    <input type="button" value="Show JSON" id="showJsonBtn" class="btn btn-success btn-xs" >
+		<canvas class="mousetrap" id="c" width="800" height="1050" style="background: url(<%= @job.file.to_s %>); no-repeat; border:1px solid #000000"></canvas>
+		<script type="text/javascript">
+			var sketch= new Sketch('c');
+			$("#clearBtn").click(function(){
+       			sketch.clear();
+		    });
+		    $("#showJsonBtn").click(function(){
+		       $('#data').val(sketch.getJSON());
+		    });
+		</script>
 	</div>
 
 	<div class="col-md-offset-1 col-md-3">
@@ -13,10 +24,13 @@
 		<div class="card-block">
 			<%= simple_form_for(@grade, url: job_grade_submit_path(@job)) do |f| %>
 				<%= f.error_notification %>
-				<%= f.input :mark, input_html: { type: 'number', max: @job.questionpaperspec.marks, min: 0 }, autofocus: false %>
-				<h1 style="text-align: center;"><%= f.label @job.questionpaperspec.marks.to_s %> </h1>	
+				<%= f.input :mark, input_html: { class: 'mousetrap', type: 'number', max: @job.questionpaperspec.marks, min: 0 }, autofocus: true %>
+				<h1 style="text-align: center;"><%= f.label @job.questionpaperspec.marks.to_s %> </h1>
+				<%= f.input :comment, :input_html => { class: 'mousetrap', id: 'comment' } %>	
+				<%= f.input :annotation, as: :hidden, :input_html => { class: 'mousetrap', id: 'data'} %>
 				<%= f.input :teacher_id, as: :hidden, :input_html => { value: @grade.teacher_id } %>
 				<%= f.input :job_id, as: :hidden, :input_html => { value: @grade.job_id } %>
+				<%= f.input :student_id, as: :hidden, :input_html => { value: @grade.student_id } %>
 				<div class="actions">
 					<%= f.button :submit,  style: "text-align: center;", disabled: 'disabled' %>
 				</div>
@@ -45,8 +59,12 @@
 	})
 </script>
 
+
 <script type="text/javascript">
-  $(function() {
-    $('#pagesketch_viewport').sketch();
-  });
+		Mousetrap.bind('up', function(){
+    		$("#applyJsonBtn").click(function(){
+		      sketch.loadJSON(jsonTA.value);
+		      console.log('a');
+		    });
+    	});
 </script>

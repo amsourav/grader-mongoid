@@ -21,6 +21,7 @@
       <% else %>
         <%= link_to 'Doc Uploaded', '#', class: 'btn btn-success' %>
       <% end %>
+        <%= link_to 'See Grades', see_grade_course_exam_path(@course, @exam), class: 'btn btn-success btn-success-outline' %>
     </p>
 
     <div class="card card-default">

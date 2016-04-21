@@ -1,5 +1,7 @@
 class ExamsController < ApplicationController
-  before_action :set_exam, only: [:show, :edit, :update, :destroy, :upload_doc, :upload_doc_submit, :attendance_sheet, :upload_attendance_sheet]
+  before_action :set_exam, only: [:show, :edit, :update, :destroy, :upload_doc, 
+                                        :upload_doc_submit, :attendance_sheet, 
+                                        :upload_attendance_sheet, :see_grade]
   before_action :set_course
   before_action :authenticate_teacher!
   # GET /exams
@@ -106,6 +108,19 @@ class ExamsController < ApplicationController
     if @asheet.save
       redirect_to course_exams_url(@course)
     end
+  end
+
+  def see_grade
+    @students = @course.students
+    # @jobs = @exam.jobs
+    # @grade_book = []
+    # @students.each do |student|
+    #   jobs = @jobs.find_all_by(student_id: student.id)
+    #   jobs.each do |job|
+    #     @grade_book << job.grade
+    #   end 
+    # end
+    # @grades = @students.grades.where(:exam_id => @exam.id)
   end
 
   private

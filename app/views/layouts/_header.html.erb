@@ -1,4 +1,4 @@
-<nav class="navbar navbar-light navbar-fixed">
+<nav class="navbar navbar-light" style="background-color: #e3f2fd;">
   <a class="navbar-brand" href="<%= root_path %>">Grader</a>
   <ul class="nav navbar-nav">
     <li class="nav-item active">
@@ -11,6 +11,10 @@
       <li class="nav-item">
         <%= link_to 'Jobs', jobs_path, class: "nav-link" %>
       </li>
+    <% elsif current_student %>
+    <li class="nav-item">
+        <%= link_to 'Grades', grades_path, class: "nav-link" %>
+        </li>
     <% end %>
     <li class="nav-item">
       <a class="nav-link" href="#">About</a>
