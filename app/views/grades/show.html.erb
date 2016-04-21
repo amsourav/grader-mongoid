@@ -10,17 +10,9 @@
 	</script>
 	<div class="col-md-offset-1 col-md-3">
 		<div class="card card-block" style="position: fixed;">
-		<div class="card-title">
 			<%= render 'card_title' %>
+			<p class="card-text"><%= @job.grade.comment %></p>				
 		</div>
-		<div class="card-block">
-			<h1 style="text-align: center;"><%= @job.grade.mark %></h1>
-			<h1 style="text-align: center;">------</h1>
-			<h1 style="text-align: center;"><%= @job.questionpaperspec.marks.to_s %></h1>
-
-			<p><%= @job.grade.comment %></p>	
-		</div>
-	</div>
 	</div>
 </div>
 
