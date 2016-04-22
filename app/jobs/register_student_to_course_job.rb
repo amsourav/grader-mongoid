@@ -10,6 +10,7 @@ class RegisterStudentToCourseJob < ActiveJob::Base
                                                                             roll: student[:roll], 
                                                                             email: student[:email], 
                                                                             password: "password")
+      StudentRegistration.send_details(@student).deliver
       course.students << @student
     end
   end

@@ -13,7 +13,7 @@ gem 'carrierwave-mongoid', :require => 'carrierwave/mongoid'
 gem 'smarter_csv'
 gem 'cocoon'
 gem 'pdfshaver'
-gem 'fabric-rails'
+gem 'mailcatcher'
 
 gem 'sidekiq'
 gem 'daemons'
@@ -36,7 +36,7 @@ group :development, :test do
   gem 'better_errors'
   gem "codeclimate-test-reporter", group: :test, require: nil
   gem 'pry-rails'
-  # gem 'lograge'
+  gem 'lograge'
   gem 'factory_girl_rails'
 end
 
