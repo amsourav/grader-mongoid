@@ -34,6 +34,11 @@
         My Jobs: <%= @teacher_exam_jobs.count %><br>
         Total Jobs left: <%= @total_exam_jobs.count - @complete_total_exam_jobs %><br>
         My Jobs left: <%= @teacher_exam_jobs.count - @complete_teacher_exam_jobs %>
+        <br>
+        <br>
+        <% if @total_exam_jobs.count - @complete_total_exam_jobs == 0 %>
+          <a class="btn btn-default btn-success-outline" href="#">Publish Grades</a>
+        <% end %>
       </div>
     </div>
 

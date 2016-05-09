@@ -19,6 +19,5 @@ module Grader
   class Application < Rails::Application
     Mongoid.raise_not_found_error = false
     GC::Profiler.enable
-    config.active_job.queue_adapter = :sidekiq
   end
 end
