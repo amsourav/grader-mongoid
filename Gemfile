@@ -1,6 +1,7 @@
 source 'https://rubygems.org'
 
 gem 'react-rails'
+gem 'delayed_job_mongoid'
 gem 'mongoid'
 gem 'devise'
 gem 'thin'

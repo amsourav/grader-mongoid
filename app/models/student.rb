@@ -30,10 +30,6 @@ class Student
 
   has_and_belongs_to_many :courses
 
-  has_many :jobs
-  has_many :grades
-
-
   # Confirmable
   field :confirmation_token,   type: String
   field :confirmed_at,         type: Time
