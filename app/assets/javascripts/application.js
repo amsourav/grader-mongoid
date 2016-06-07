@@ -18,4 +18,7 @@
 //= require mousetrap.min
 //= require mark
 //= require cocoon
+//= require react
+//= require react_ujs
+//= require components
 //= require_tree .
