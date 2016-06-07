@@ -7,6 +7,6 @@ class StudentRegistration < ApplicationMailer
 	def send_enrollment_notification(student, course)
 		@student = student
 		@course = course
-		mail(to: @student.email, subject: "Enrolled in: #{@course.code} %>")
+		mail(to: @student.email, subject: "Enrolled in: #{@course.code}")
 	end
 end

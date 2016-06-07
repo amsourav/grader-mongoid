@@ -5,6 +5,8 @@
     <tr>
       <th>Name</th>
       <th>Date</th>
+      <th># Questions</th>
+      <th>Total Marks</th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -14,9 +16,13 @@
       <tr>
         <td><%= exam.name %></td>
         <td><%= exam.date %></td>
-        <td><%= link_to 'Show', course_exam_path(@course, exam) %></td>
-        <td><%= link_to 'Edit', edit_course_exam_path(@course, exam) %></td>
-        <td><%= link_to 'Destroy', course_exam_path(@course, exam), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= exam.total_questions %></td>
+        <td><%= exam.total_marks %></td>
+        <div class="btn-group">
+          <td><%= link_to 'Questions', course_exam_questions_path(@course, exam), class: "btn btn-secondary" %></td>
+          <td><%= link_to 'Edit', edit_course_exam_path(@course, exam), class: "btn btn-warning" %></td>
+          <td><%= link_to 'Destroy', course_exam_path(@course, exam), method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger" %></td>
+        </div>
       </tr>
     <% end %>
   </tbody>

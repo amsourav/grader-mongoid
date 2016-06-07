@@ -1,6 +1,7 @@
 source 'https://rubygems.org'
 
 gem 'react-rails'
+gem 'sprockets-es6'
 gem 'delayed_job_mongoid'
 gem 'mongoid'
 gem 'devise'
@@ -29,7 +30,7 @@ group :development, :test do
   gem 'byebug'
   gem 'rspec-rails'
   gem 'bullet'
-  gem 'rack-mini-profiler'
+  # gem 'rack-mini-profiler'
   gem 'better_errors'
   gem "codeclimate-test-reporter", require: nil
   gem 'pry-rails'

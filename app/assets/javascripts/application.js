@@ -16,9 +16,12 @@
 //= require bootstrap
 //= require jasny-bootstrap
 //= require mousetrap.min
-//= require mark
 //= require cocoon
 //= require react
 //= require react_ujs
 //= require components
 //= require_tree .
+
+$('#new_question').on('shown.bs.modal', function () {
+//  $('#tag').focus()
+})

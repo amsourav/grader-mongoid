@@ -1,0 +1,14 @@
+<%= simple_form_for([@course, @exam, @questions]) do |f| %>
+  <%= f.error_notification %>
+  <% @questions.each do |question| %>
+    <%= simple_fields_for question do |q| %>
+    <div class="form-inputs">
+      <%= q.input :tag, as: :text, input_html: { id: 'tag' } %>
+      <%= q.input :mark %>
+    </div>
+    <% end %>
+  <% end %>
+  <div class="form-actions">
+    <%= f.button :submit %>
+  </div>
+<% end %>

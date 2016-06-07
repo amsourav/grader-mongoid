@@ -16,6 +16,8 @@ Rails.application.routes.draw do
       post 'upload_student_roster'
       post 'add_teacher'
     end
-    resources :exams
+    resources :exams do
+      resources :questions
+    end
   end
 end

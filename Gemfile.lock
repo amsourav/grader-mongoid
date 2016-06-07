@@ -170,8 +170,6 @@ GEM
     pry-rails (0.3.4)
       pry (>= 0.9.10)
     rack (1.6.4)
-    rack-mini-profiler (0.10.1)
-      rack (>= 1.2.0)
     rack-test (0.6.3)
       rack (>= 1.0)
     rails (4.2.5.1)
@@ -252,6 +250,10 @@ GEM
     sprockets (3.6.0)
       concurrent-ruby (~> 1.0)
       rack (> 1, < 3)
+    sprockets-es6 (0.9.0)
+      babel-source (>= 5.8.11)
+      babel-transpiler
+      sprockets (>= 3.0.0)
     sprockets-rails (3.0.4)
       actionpack (>= 4.0)
       activesupport (>= 4.0)
@@ -306,7 +308,6 @@ DEPENDENCIES
   octicons-rails
   pdfshaver
   pry-rails
-  rack-mini-profiler
   rails (= 4.2.5.1)
   react-rails
   rspec-rails
@@ -315,6 +316,7 @@ DEPENDENCIES
   simple_form
   smarter_csv
   spring
+  sprockets-es6
   therubyracer
   thin
   turbolinks
