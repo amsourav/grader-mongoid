@@ -1,7 +1,7 @@
 class QuestionsController < ApplicationController
   before_action :set_question, only: [:show, :edit, :update, :destroy]
-  before_action :set_course
-  before_action :set_exam
+  before_action :set_course, except: [:show, :edit]
+  before_action :set_exam, except: [:show, :edit]
   before_action :authenticate_teacher!
 
   # GET /questions
@@ -18,9 +18,7 @@ class QuestionsController < ApplicationController
 
   # GET /questions/new
   def new
-    @questions = Array.new(@exam.total_questions) {
-        @exam.questions.new
-    }
+    @question = @exam.questions.new
   end
 
   # GET /questions/1/edit
@@ -82,6 +80,6 @@ class QuestionsController < ApplicationController
     end
     # Never trust parameters from the scary internet, only allow the white list through.
     def question_params
-      params.require(:question).permit(:tag, :mark)
+      params.require(:question).permit(:tag, :mark, :pages, part_question_attributes: [:_id, :sub_tag, :mark, :page])
     end
 end

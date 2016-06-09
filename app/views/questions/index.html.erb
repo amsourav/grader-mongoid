@@ -14,9 +14,9 @@
       <tr>
         <td><%= question.tag %></td>
         <td><%= question.mark %></td>
-        <td><%= link_to 'Show', course_exam_question_path(@course, @exam, question) %></td>
-        <td><%= link_to 'Edit', edit_course_exam_question_path(@course, @exam, question) %></td>
-        <td><%= link_to 'Destroy', course_exam_question_path(@course, @exam, question), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Show', question_path(question) %></td>
+        <td><%= link_to 'Edit', edit_question_path(question) %></td>
+        <td><%= link_to 'Destroy', question, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>

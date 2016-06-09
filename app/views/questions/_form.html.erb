@@ -1,13 +1,21 @@
-<%= simple_form_for([@course, @exam, @questions]) do |f| %>
+<%= simple_form_for([@course, @exam, @question]) do |f| %>
   <%= f.error_notification %>
-  <% @questions.each do |question| %>
-    <%= simple_fields_for question do |q| %>
     <div class="form-inputs">
-      <%= q.input :tag, as: :text, input_html: { id: 'tag' } %>
-      <%= q.input :mark %>
+      <%= f.input :tag, as: :text, input_html: { id: 'tag' } %>
+      <%= f.input :mark, as: :integer %>
+      <%= f.input :pages, as: :integer %>
     </div>
-    <% end %>
-  <% end %>
+    <h3>Part Questions</h3>
+    <div class="row" id="PartQuestions">
+      <div class="col-md-offset-3 col-md-6">
+        <%= f.simple_fields_for :part_questions do |q| %>
+         <%= render 'part_question_fields', f: q %> 
+        <% end %>
+      </div>
+    </div>
+    <div class="links">
+      <%= link_to_add_association 'Add PartQuestion', f, :part_questions %>
+    </div>
   <div class="form-actions">
     <%= f.button :submit %>
   </div>

@@ -14,10 +14,9 @@ Rails.application.routes.draw do
     member do
       get 'student_roster'
       post 'upload_student_roster'
-      post 'add_teacher'
     end
     resources :exams do
-      resources :questions
+      resources :questions, shallow: true
     end
   end
 end

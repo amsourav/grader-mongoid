@@ -1,19 +1,33 @@
+# development:
+#   clients:
+#     default:
+#       database: grader_development
+#       hosts:
+#         - localhost:27017
+#       options:
+#   options:
+
+# test:
+#   clients:
+#     default:
+#       database: grader_test
+#       hosts:
+#         - localhost:27017
+#       options:
+#         read:
+#           mode: :primary
+#         max_pool_size: 1
+
+production:
+  clients:
+    default:
+     uri: mongodb://root:root@ds017231.mlab.com:17231/parse_server_sarkar
+     options:
+       connect_timeout: 15
+
 development:
   clients:
     default:
-      database: grader_development
-      hosts:
-        - localhost:27017
-      options:
-  options:
-
-test:
-  clients:
-    default:
-      database: grader_test
-      hosts:
-        - localhost:27017
-      options:
-        read:
-          mode: :primary
-        max_pool_size: 1
+     uri: mongodb://root:root@ds017231.mlab.com:17231/parse_server_sarkar
+     options:
+       connect_timeout: 15
