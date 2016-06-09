@@ -24,9 +24,10 @@ gem 'jquery-rails'
 gem 'jbuilder', '~> 2.0'
 gem 'sdoc', '~> 0.4.0', group: :doc
 
+gem 'letter_opener'
+gem 'letter_opener_web'
+
 group :development, :test do
-  gem 'letter_opener'
-  gem 'letter_opener_web'
   gem 'byebug'
   gem 'rspec-rails'
   gem 'bullet'

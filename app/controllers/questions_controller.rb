@@ -1,7 +1,7 @@
 class QuestionsController < ApplicationController
   before_action :set_question, only: [:show, :edit, :update, :destroy]
-  before_action :set_course, except: [:show, :edit]
-  before_action :set_exam, except: [:show, :edit]
+  before_action :set_course, except: [:show, :edit, :destroy]
+  before_action :set_exam, except: [:show, :edit, :destroy]
   before_action :authenticate_teacher!
 
   # GET /questions
@@ -18,7 +18,9 @@ class QuestionsController < ApplicationController
 
   # GET /questions/new
   def new
-    @question = @exam.questions.new
+    3.times do
+      @question = @exam.questions.new
+    end
   end
 
   # GET /questions/1/edit
@@ -58,9 +60,11 @@ class QuestionsController < ApplicationController
   # DELETE /questions/1
   # DELETE /questions/1.json
   def destroy
+    exam = @question.exam
+    course = exam.course
     @question.destroy
     respond_to do |format|
-      format.html { redirect_to course_exam_questions_url(@course, @exam), notice: 'Question was successfully destroyed.' }
+      format.html { redirect_to course_exam_questions_url(course, exam), notice: 'Question was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
@@ -80,6 +84,6 @@ class QuestionsController < ApplicationController
     end
     # Never trust parameters from the scary internet, only allow the white list through.
     def question_params
-      params.require(:question).permit(:tag, :mark, :pages, part_question_attributes: [:_id, :sub_tag, :mark, :page])
+      params.require(:question).permit(:tag, :mark, :pages, part_questions_attributes: [:_id, :sub_tag, :mark, :_destroy])
     end
 end

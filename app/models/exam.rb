@@ -1,5 +1,7 @@
 class Exam
   include Mongoid::Document
+  include Mongoid::Timestamps
+
   field :name, type: String
   field :date, type: Date
   field :total_questions, type: Integer
