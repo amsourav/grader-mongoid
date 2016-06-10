@@ -1,5 +1,7 @@
 class ExamsController < ApplicationController
-  before_action :set_exam, only: [:show, :edit, :update, :destroy, :manage, :send_reminder_mail]
+  before_action :set_exam, only: [:show, :edit, :update, :destroy,
+                                :manage, :send_reminder_mail,
+                                :upload_student_attendance_sheet, :upload_test_papers]
   before_action :set_course
   before_action :authenticate_teacher!
   # GET /exams
@@ -65,14 +67,37 @@ class ExamsController < ApplicationController
   end
 
   def manage
-    @admitted_students = nil
+    @admitted_students = @exam.test_givers.pluck(:name, :roll, :email) || nil
+    respond_to do |format|
+      format.html
+      format.js
+    end
   end
 
   def send_reminder_mail
     @students = @course.students
     SendExamReminderJob.perform_now(@students, @exam)
-    flash[:notice] = "Email Sent to all students!"
+    flash.now[:notice] = "Email Sent to all students!"
     redirect_to manage_course_exam_path(@course, @exam)
+  end
+
+  def upload_student_attendance_sheet
+    if @exam.update(upload_student_attendance_sheet_params)
+      ProcessAttendanceSheetJob.perform_now(@exam)
+      redirect_to manage_course_exam_path(@course, @exam)
+    else
+      flash[:notice] = @exam.errors.full_messages.first
+      redirect_to manage_course_exam_path(@course, @exam)
+    end
+  end
+
+  def upload_test_papers
+    if @exam.update(upload_test_papers_params)
+      redirect_to manage_course_exam_path(@course, @exam)
+    else
+      flash[:notice] = @exam.errors.full_messages.first
+      redirect_to manage_course_exam_path(@course, @exam)
+    end
   end
 
   private
@@ -88,5 +113,13 @@ class ExamsController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def exam_params
       params.require(:exam).permit(:name, :date, :total_marks, :total_questions)
+    end
+
+    def upload_student_attendance_sheet_params
+      params.require(:exam).permit(:attendance_sheet)
+    end
+
+    def upload_test_papers_params
+      params.require(:exam).permit(:test_papers)
     end
 end

@@ -2,7 +2,7 @@
   <div class="col-md-offset-4 col-md-4">
     <div class="btn-group">
       <%= link_to 'Build', course_exam_questions_path(@course, @exam), class: "btn btn-secondary" %>
-      <%= link_to 'Publish' , '#', class: "btn btn-info" %>
+      <%= link_to 'Publish' , '#', class: "btn btn-info disabled" %>
       <%= link_to 'Send Reminder', '#send_reminder', class: "btn btn-warning", 'data-toggle' => 'modal' %>
     </div>
   </div>
@@ -14,16 +14,36 @@
   <h1 style="text-align: center;">Start Exam</h1>
   <div align="center">
     <h2>Upload Attendence Sheet</h2>
-    <%= simple_form_for('#', multipart: true) do |f| %>
+    <%= simple_form_for(@exam , url: upload_student_attendance_sheet_course_exam_path(@course, @exam) , multipart: true) do |f| %>
+      <%= f.file_field :attendance_sheet %>
+      <%= f.submit "Upload", class: 'btn btn-primary' %>
     <% end %>
+
+    <br />
+
+    <div>
+      <h2>  <%= @admitted_students.count %> students attended the test </h2>
+    </div>
   </div>
+
 </div>
+
+<br />
 
 <div class="row">
   <%= react_component 'StudentList', @admitted_students %>
 </div>
 
-
+<div class="row">
+  <div align="center">
+    <h2>Upload Answer Scripts</h2>
+    <h2>It should have <%=  @admitted_students.count * @exam.questions.pluck(:pages).map(&:to_i).sum %> pages </h2>
+    <%= simple_form_for(@exam , url: upload_test_papers_course_exam_path(@course, @exam) , multipart: true) do |f| %>
+      <%= f.file_field :test_papers %>
+      <%= f.submit "Upload", class: 'btn btn-primary' %>
+    <% end %>
+  </div>
+</div>
 
 <div class="modal fade" id="send_reminder" >
   <div class="modal-dialog" role="document">

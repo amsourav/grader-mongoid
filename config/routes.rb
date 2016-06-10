@@ -6,9 +6,7 @@ Rails.application.routes.draw do
   devise_for :students
   devise_for :teachers
 
-  if Rails.env.development?
-    mount LetterOpenerWeb::Engine, at: "/letter_opener"
-  end
+  mount LetterOpenerWeb::Engine, at: "/letter_opener"
 
   resources :courses do
     member do
@@ -19,6 +17,8 @@ Rails.application.routes.draw do
       member do
         get 'manage'
         get 'send_reminder_mail'
+        patch 'upload_student_attendance_sheet'
+        patch 'upload_test_papers'
       end
       resources :questions, shallow: true
     end
