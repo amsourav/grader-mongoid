@@ -16,6 +16,10 @@ Rails.application.routes.draw do
       post 'upload_student_roster'
     end
     resources :exams do
+      member do
+        get 'manage'
+        get 'send_reminder_mail'
+      end
       resources :questions, shallow: true
     end
   end

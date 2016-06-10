@@ -5,6 +5,7 @@ gem 'sprockets-es6'
 gem 'delayed_job_mongoid'
 gem 'mongoid'
 gem 'devise'
+gem 'devise_invitable'
 gem 'thin'
 gem 'turbolinks'
 gem 'simple_form'
@@ -31,7 +32,7 @@ group :development, :test do
   gem 'byebug'
   gem 'rspec-rails'
   gem 'bullet'
-  # gem 'rack-mini-profiler'
+  gem 'rack-mini-profiler'
   gem 'better_errors'
   gem "codeclimate-test-reporter", require: nil
   gem 'pry-rails'
@@ -42,4 +43,6 @@ end
 group :development do
   gem 'web-console', '~> 2.0'
   gem 'spring'
+  gem 'capistrano'
+  gem 'capistrano-rails'
 end

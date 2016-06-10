@@ -1,17 +1,33 @@
+<!-- Used helpers in ths page -->
 <div class="row">
-  <div class="col-md-4">
-    <div class="card">
-      <div class="card-block">
-        <div class="card-header">
-          <h1 style="text-align: center;">Marks</h1>
-        </div>
-        <div class="card-text">
-          <h1 id="left" style="text-align: center;"><%=  check_marks_count %></h1>
+
+    <div class="col-md-4">
+      <div class="card">
+        <div class="card-block">
+          <div class="card-header">
+            <h1 style="text-align: center;">Marks</h1>
+          </div>
+          <div class="card-text">
+            <h1 id="left" style="text-align: center;"><%=  check_marks_count %> left</h1>
+          </div>
         </div>
       </div>
     </div>
-  </div>
-  <div class="col-md-offset-4 col-md-4">
+
+    <div class="col-md-4">
+      <div class="card">
+        <div class="card-block">
+          <div class="card-header">
+            <h1 style="text-align: center;">Pages</h1>
+          </div>
+          <div class="card-text">
+            <h1 id="right" style="text-align: center;"><%= check_pages_count %></h1>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  <div class="col-md-4">
     <div class="card">
       <div class="card-block">
         <div class="card-header">
@@ -23,6 +39,7 @@
       </div>
     </div>
   </div>
+
 </div>
 
 <table class="table table-striped">
@@ -50,6 +67,20 @@
         <td><%= link_to 'Destroy', question, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
+      <td>
+        <h1>Total</h1>
+      </td>
+      <td>
+        <h1>
+          <%= @questions.pluck(:mark).map(&:to_i).sum %>
+        </h1>
+      </td>
+      <td>
+        <h1>
+          <%= check_pages_count %>
+
+        </h1>
+      </td>
   </tbody>
 </table>
 
@@ -75,4 +106,11 @@
   </div>
 </div>
 
+<% else %>
+
+<div class="col-md-offset-4 col-md-4">
+  <a href="<%= manage_course_exam_path(@course, @questions.first.exam) %>">
+    <div style="text-align: center;" class="octicon octicon-arrow-left"></div>
+  </a>
+</div>
 <% end %>

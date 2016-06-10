@@ -1,5 +1,5 @@
 class ExamsController < ApplicationController
-  before_action :set_exam, only: [:show, :edit, :update, :destroy]
+  before_action :set_exam, only: [:show, :edit, :update, :destroy, :manage, :send_reminder_mail]
   before_action :set_course
   before_action :authenticate_teacher!
   # GET /exams
@@ -62,6 +62,17 @@ class ExamsController < ApplicationController
       format.html { redirect_to course_exams_path(@course), notice: 'Exam was successfully destroyed.' }
       format.json { head :no_content }
     end
+  end
+
+  def manage
+    @admitted_students = nil
+  end
+
+  def send_reminder_mail
+    @students = @course.students
+    SendExamReminderJob.perform_now(@students, @exam)
+    flash[:notice] = "Email Sent to all students!"
+    redirect_to manage_course_exam_path(@course, @exam)
   end
 
   private

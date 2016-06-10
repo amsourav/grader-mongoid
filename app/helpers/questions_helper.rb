@@ -13,6 +13,10 @@ module QuestionsHelper
     end
   end
 
+  def check_pages_count
+    @questions.pluck(:pages).map(&:to_i).sum
+  end
+
   def check_question_paper_complete
     if check_questions_count == 0 && check_marks_count == 0
       flash[:notice] = "Looks like you have completed making the question paper"

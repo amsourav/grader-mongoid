@@ -37,4 +37,8 @@ class Teacher
   # field :locked_at,       type: Time
   has_many :courses, dependent: :destroy
   has_many :questions
+
+  def name_of_teacher
+    self.email
+  end
 end

@@ -37,6 +37,8 @@ GEM
       thread_safe (~> 0.3, >= 0.3.4)
       tzinfo (~> 1.1)
     addressable (2.4.0)
+    airbrussh (1.0.2)
+      sshkit (>= 1.6.1, != 1.7.0)
     arel (6.0.3)
     autoprefixer-rails (6.3.6.2)
       execjs
@@ -60,6 +62,19 @@ GEM
       activesupport (>= 3.0.0)
       uniform_notifier (~> 1.10.0)
     byebug (9.0.5)
+    capistrano (3.5.0)
+      airbrussh (>= 1.0.0)
+      capistrano-harrow
+      i18n
+      rake (>= 10.0.0)
+      sshkit (>= 1.9.0)
+    capistrano-bundler (1.1.4)
+      capistrano (~> 3.1)
+      sshkit (~> 1.2)
+    capistrano-harrow (0.5.1)
+    capistrano-rails (1.1.6)
+      capistrano (~> 3.1)
+      capistrano-bundler (~> 1.1)
     carrierwave (0.11.2)
       activemodel (>= 3.2.0)
       activesupport (>= 3.2.0)
@@ -97,6 +112,9 @@ GEM
       railties (>= 4.1.0, < 5.1)
       responders
       warden (~> 1.2.3)
+    devise_invitable (1.6.0)
+      actionmailer (>= 3.2.6)
+      devise (>= 3.2.0)
     diff-lcs (1.2.5)
     docile (1.1.5)
     erubis (2.7.0)
@@ -154,6 +172,9 @@ GEM
       mime-types (>= 1.0, < 3.0)
       mongoid (>= 3.0, < 6.0)
     multi_json (1.12.1)
+    net-scp (1.2.1)
+      net-ssh (>= 2.6.5)
+    net-ssh (3.1.1)
     nokogiri (1.6.8)
       mini_portile2 (~> 2.1.0)
       pkg-config (~> 1.1.7)
@@ -170,6 +191,8 @@ GEM
     pry-rails (0.3.4)
       pry (>= 0.9.10)
     rack (1.6.4)
+    rack-mini-profiler (0.10.1)
+      rack (>= 1.2.0)
     rack-test (0.6.3)
       rack (>= 1.0)
     rails (4.2.5.1)
@@ -258,6 +281,9 @@ GEM
       actionpack (>= 4.0)
       activesupport (>= 4.0)
       sprockets (>= 3.0.0)
+    sshkit (1.10.0)
+      net-scp (>= 1.1.2)
+      net-ssh (>= 2.8.0)
     therubyracer (0.12.2)
       libv8 (~> 3.16.14.0)
       ref
@@ -291,6 +317,8 @@ DEPENDENCIES
   bootstrap (~> 4.0.0.alpha3)
   bullet
   byebug
+  capistrano
+  capistrano-rails
   carrierwave-mongoid
   cocoon
   codeclimate-test-reporter
@@ -298,6 +326,7 @@ DEPENDENCIES
   daemons
   delayed_job_mongoid
   devise
+  devise_invitable
   factory_girl_rails
   jbuilder (~> 2.0)
   jquery-rails
@@ -308,6 +337,7 @@ DEPENDENCIES
   octicons-rails
   pdfshaver
   pry-rails
+  rack-mini-profiler
   rails (= 4.2.5.1)
   react-rails
   rspec-rails

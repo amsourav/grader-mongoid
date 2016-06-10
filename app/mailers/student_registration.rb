@@ -9,4 +9,11 @@ class StudentRegistration < ApplicationMailer
 		@course = course
 		mail(to: @student.email, subject: "Enrolled in: #{@course.code}")
 	end
+
+	def exam_reminder(student, exam)
+		@student = student
+		@exam = exam
+
+		mail(to: @student.email, subject: "You have an upcoming Exam")
+	end
 end
