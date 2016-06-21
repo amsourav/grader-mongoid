@@ -1,6 +1,7 @@
 source 'https://rubygems.org'
 
 gem 'react-rails'
+gem 'nprogress-rails'
 gem 'active_model_serializers'
 gem 'sprockets-es6'
 gem 'delayed_job_mongoid'

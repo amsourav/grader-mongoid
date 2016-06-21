@@ -18,10 +18,11 @@ class RegisterStudentToCourseJob < ActiveJob::Base
       #   StudentRegistration.send_enrollment_notification(@student, course).deliver
       #   course.students << @student
       # end
+      generated_password = Devise.friendly_token.first(8)
       @student = Student.find_by(email: student[:email]) || Student.create!(name: student[:name],
                                                                             roll: student[:roll],
                                                                             email: student[:email],
-                                                                            password: "password")
+                                                                            password: generated_password)
 
       StudentRegistration.delay.send_enrollment_notification(@student, course)
       course.students << @student
