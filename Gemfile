@@ -2,6 +2,8 @@ source 'https://rubygems.org'
 
 gem 'react-rails'
 gem 'nprogress-rails'
+gem "skylight"
+gem 'faster_path'
 gem 'active_model_serializers'
 gem 'sprockets-es6'
 gem 'delayed_job_mongoid'
@@ -35,6 +37,8 @@ group :development, :test do
   gem 'rspec-rails'
   gem 'bullet'
   gem 'rack-mini-profiler'
+  gem 'stackprof'
+  gem 'flamegraph'
   gem 'better_errors'
   gem "codeclimate-test-reporter", require: nil
   gem 'pry-rails'

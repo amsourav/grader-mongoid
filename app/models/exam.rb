@@ -12,7 +12,7 @@ class Exam
   #   end
   # end
 
-  validate :check_upload_file, on: :update
+  # validate :check_upload_file, on: :update
 
   field :name, type: String
   field :date, type: Date

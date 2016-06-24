@@ -37,7 +37,7 @@
 <div class="row">
   <div align="center">
     <h2>Upload Answer Scripts</h2>
-    <h2>It should have <%=  @admitted_students.count * @exam.questions.pluck(:pages).map(&:to_i).sum %> pages </h2>
+    <h2>It should have <%=  total_pages %> pages </h2>
     <%= simple_form_for(@exam , url: upload_test_papers_course_exam_path(@course, @exam) , multipart: true) do |f| %>
       <%= f.file_field :test_papers %>
       <%= f.submit "Upload", class: 'btn btn-primary' %>
