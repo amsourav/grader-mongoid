@@ -1,0 +1,6 @@
+<h1>Editing Question</h1>
+
+<%= render 'form' %>
+
+<%= link_to 'Show', @question %> |
+<%= link_to 'Back', course_exam_questions_path(@question.exam.course, @question.exam) %>

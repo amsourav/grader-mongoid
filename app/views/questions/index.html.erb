@@ -1,0 +1,115 @@
+<!-- Used helpers in ths page -->
+<div class="row">
+
+    <div class="col-md-4">
+      <div class="card">
+        <div class="card-block">
+          <div class="card-header">
+            <h1 style="text-align: center;">Marks</h1>
+          </div>
+          <div class="card-text">
+            <h1 id="left" style="text-align: center;"><%=  check_marks_count %> left</h1>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-4">
+      <div class="card">
+        <div class="card-block">
+          <div class="card-header">
+            <h1 style="text-align: center;">Pages</h1>
+          </div>
+          <div class="card-text">
+            <h1 id="right" style="text-align: center;"><%= check_pages_count %></h1>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  <div class="col-md-4">
+    <div class="card">
+      <div class="card-block">
+        <div class="card-header">
+          <h1 style="text-align: center;">Questions</h1>
+        </div>
+        <div class="card-text">
+          <h1 id="right" style="text-align: center;"><%= check_questions_count %> left</h1>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Tag</th>
+      <th>Mark</th>
+      <th>
+        Pages
+      </th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @questions.each do |question| %>
+      <tr>
+        <td><%= question.tag %></td>
+        <td><%= question.mark %></td>
+        <td>
+          <%= question.pages %>
+        </td>
+        <td><%= link_to 'Show', question_path(question) %></td>
+        <td><%= link_to 'Edit', edit_question_path(question) %></td>
+        <td><%= link_to 'Destroy', question, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+      <td>
+        <h1>Total</h1>
+      </td>
+      <td>
+        <h1>
+          <%= @questions.pluck(:mark).map(&:to_i).sum %>
+        </h1>
+      </td>
+      <td>
+        <h1>
+          <%= check_pages_count %>
+        </h1>
+      </td>
+  </tbody>
+</table>
+
+<br>
+
+<%# link_to 'New Question', new_course_exam_question_path(@course, @exam) %>
+
+<% if !check_question_paper_complete %>
+
+<%= link_to 'New Question', '#new_question', 'data-toggle' => 'modal' %>
+
+<div class="modal fade" id="new_question" >
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">New Question</h4>
+      </div>
+      <div class="modal-body">
+          <%= render 'form' %>
+      </div>
+    </div>
+  </div>
+</div>
+
+<% else %>
+
+<div class="col-md-offset-4 col-md-4">
+  <a href="<%= manage_course_exam_path(@course, @questions.first.exam) %>">
+    <div style="text-align: center;" class="octicon octicon-arrow-left"></div>
+  </a>
+</div>
+<% end %>

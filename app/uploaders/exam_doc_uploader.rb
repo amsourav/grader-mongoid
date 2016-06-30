@@ -8,7 +8,7 @@ class ExamDocUploader < CarrierWave::Uploader::Base
   # Choose what kind of storage to use for this uploader:
   storage :file
   # storage :fog
-
+  # before :store, :page_count
   # Override the directory where uploaded files will be stored.
   # This is a sensible default for uploaders that are meant to be mounted:
   def store_dir
@@ -46,5 +46,12 @@ class ExamDocUploader < CarrierWave::Uploader::Base
   # def filename
   #   "something.jpg" if original_filename
   # end
-
+  #
+  # def page_count(file)
+  #   p_length = PDFShaver::Document.new(self.file.file).length
+  #   true_length = self.model.questions.pluck(:pages).sum
+  #   if p_length != true_length
+  #     return false
+  #   end
+  # end
 end

@@ -19,11 +19,12 @@
         <td><%= course.semester %></td>
         <td><%= course.year %></td>
         <div class="btn-group">
-          <td><%= link_to 'Exams', course_exams_path(course), class: "btn btn-success-outline" %></td>
+          <td><%= link_to 'Exams', course_exams_path(course),  class: "btn btn-secondary" %></td>
           <td>
-            <%= link_to 'Roster',  student_roster_course_path(course), class: "btn btn-warning-outline" %>
+            <%= link_to 'Roster',  student_roster_course_path(course), class: "btn btn-info" %>
+            <%# link_to 'Roster', '#add_students_to_course', 'data-toggle' => 'modal', class: "btn btn-warning-outline" %>
           </td>
-          <td><%= link_to 'Edit', edit_course_path(course), class: "btn btn-info-outline" %></td>
+          <td><%= link_to 'Edit', edit_course_path(course), class: "btn btn-warning" %></td>
         </div>
       </tr>
     <% end %>
@@ -32,4 +33,20 @@
 
 <br>
 
-<%= link_to 'New Course', new_course_path %>
+<%# link_to 'New Course', new_course_path %>
+
+<%= link_to 'New Course', '#new_course', 'data-toggle' => 'modal' %>
+
+<div class="modal fade" id="new_course" >
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">New Course</h4>
+      </div>
+      <div class="modal-body">
+        <%= render 'form' %>
+      </div>
+    </div>
+  </div>
+</div>

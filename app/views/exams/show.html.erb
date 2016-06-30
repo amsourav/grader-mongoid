@@ -1,81 +1,14 @@
-<div class="row">
-  <div class="col-md-6">
-    <p>
-      <strong>Name:</strong>
-      <%= @exam.name %>
-    </p>
+<p id="notice"><%= notice %></p>
 
-    <p>
-      <strong>Date:</strong>
-      <%= @exam.date %>
-    </p>
+<p>
+  <strong>Name:</strong>
+  <%= @exam.name %>
+</p>
 
-    <p>
-      <strong>Page Size: </strong>
-      <%= @exam.page_size %>
-    </p>
-
-    <p>
-      <% if !@exam.exam_doc? %>
-        <%= link_to 'Upload Doc', upload_doc_course_exam_path(@course, @exam), class: 'btn btn-danger btn-danger-outline' %>
-      <% else %>
-        <%= link_to 'Doc Uploaded', '#', class: 'btn btn-success' %>
-      <% end %>
-        <%= link_to 'See Grades', see_grade_course_exam_path(@course, @exam), class: 'btn btn-success btn-success-outline' %>
-    </p>
-
-    <div class="card card-default">
-      <div class="card-header">
-        Job Statistics
-      </div>
-
-      <div class="card-block">
-        Total Jobs: <%= @total_exam_jobs.count %><br>
-        My Jobs: <%= @teacher_exam_jobs.count %><br>
-        Total Jobs left: <%= @total_exam_jobs.count - @complete_total_exam_jobs %><br>
-        My Jobs left: <%= @teacher_exam_jobs.count - @complete_teacher_exam_jobs %>
-        <br>
-        <br>
-        <% if @total_exam_jobs.count - @complete_total_exam_jobs == 0 %>
-          <a class="btn btn-default btn-success-outline" href="#">Publish Grades</a>
-        <% end %>
-      </div>
-    </div>
-
-
-    </div>
-
-    <div class="col-md-6">
-    <% @exam.questionpaperspecs.each do |question| %>
-		    <div class="card card-default">
-		      <div class="card-header"><%= "Question" %></div>
-		      <div class="card-block">
-		      	<p>
-		      		<%= question.tag %>
-		      	</p>
-		      	<p>
-		      		<strong>
-		      			Marks:
-		      		</strong>
-		      		<%= question.marks %>
-		      	</p>
-		      	<p>
-		      		<strong>
-		      			Alloted Pages:
-		      		</strong>
-		      		<%= question.page %>
-		      	</p>
-            <p>
-              <strong>
-              Grader:
-            </strong>
-            <%= question.teacher.email %>
-            </p>
-		      </div>
-		    </div>
-		<% end %>
-  </div>
-</div>
+<p>
+  <strong>Date:</strong>
+  <%= @exam.date %>
+</p>
 
 <%= link_to 'Edit', edit_course_exam_path(@course, @exam) %> |
 <%= link_to 'Back', course_exams_path(@course) %>
