@@ -1,5 +1,7 @@
 source 'https://rubygems.org'
 
+gem 'mongoid-slug'
+gem 'unicorn'
 gem 'react-rails'
 gem 'nprogress-rails'
 gem "skylight"
@@ -10,7 +12,6 @@ gem 'delayed_job_mongoid'
 gem 'mongoid'
 gem 'devise'
 gem 'devise_invitable'
-gem 'thin'
 gem 'turbolinks'
 gem 'simple_form'
 gem 'bootstrap', '~> 4.0.0.alpha3'

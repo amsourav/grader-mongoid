@@ -1,6 +1,7 @@
 class Exam
   include Mongoid::Document
   include Mongoid::Timestamps
+  include Mongoid::Slug
   #
   # include ActiveModel::Validations
   #
@@ -23,6 +24,8 @@ class Exam
   field :test_papers, type: String
   mount_uploader :attendance_sheet, AttendanceSheetUploader
   mount_uploader :test_papers, ExamDocUploader
+
+  slug :name, scope: :course
 
   has_and_belongs_to_many :test_givers, class_name: 'Student'
   belongs_to :course

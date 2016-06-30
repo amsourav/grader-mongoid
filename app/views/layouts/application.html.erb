@@ -4,12 +4,13 @@
   <title>Grader</title>
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'nprogress' %>
+  <%= javascript_include_tag 'nprogress-turbolinks' %>
   <%= javascript_include_tag 'cocoon' %>
   <%= csrf_meta_tags %>
 </head>
 <body>
   <%= render 'layouts/header' %>
-
 <div class="container" style="padding-top: 30px;">
   <% if notice %>
     <p class="alert alert-info"><%= notice %></p>
