@@ -1,12 +1,11 @@
 class CoursesController < ApplicationController
-  before_action :set_course, only: [:show, :edit, :update, :destroy,
+  before_action :set_course, only: [:show, :edit, :update, :destroy, 
                                 :upload_student_roster, :student_roster, :grade ]
   before_action :authenticate_teacher!
   # GET /courses
   # GET /courses.json
   def index
     @courses = current_teacher.courses.all
-    @course = current_teacher.courses.new
   end
 
   # GET /courses/1
@@ -73,15 +72,12 @@ class CoursesController < ApplicationController
   def upload_student_roster
     @student_roster = @course.build_student_roster(upload_student_roster_params)
     if @student_roster.save
-      count = RegisterStudentToCourseJob.perform_now(@student_roster.student_list.path, @course)
+      RegisterStudentToCourseJob.perform_now(@student_roster.student_list.path, @course)
       respond_to do |format|
-        flash[:notice] = "#{count} new students were added!"
         format.html { redirect_to courses_url }
       end
     end
   end
-
-
 
   private
     # Use callbacks to share common setup or constraints between actions.

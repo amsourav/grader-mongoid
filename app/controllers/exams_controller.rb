@@ -1,19 +1,49 @@
 class ExamsController < ApplicationController
-  before_action :set_exam, only: [:show, :edit, :update, :destroy,
-                                :manage, :send_reminder_mail,
-                                :upload_student_attendance_sheet, :upload_test_papers]
+  before_action :set_exam, only: [:show, :edit, :update, :destroy, :upload_doc,
+                                        :upload_doc_submit, :attendance_sheet,
+                                        :upload_attendance_sheet, :see_grade]
   before_action :set_course
   before_action :authenticate_teacher!
   # GET /exams
   # GET /exams.json
   def index
     @exams = @course.exams.all
-    @exam = @course.exams.new
+  end
+
+  def upload_doc
+    @doc = @exam.build_exam_doc
+  end
+
+  def upload_doc_submit
+    @doc = @exam.build_exam_doc(upload_doc_submit_params)
+    # @exam.update(upload_doc_submit_params)
+    if @doc.save
+      # HandleFileConversionJob.perform(@exam.exam_doc.path, @exam.questionpaperspecs.length, @exam.exam_students.length)
+      # Resque.enqueue(HandleFileConversionJob.perform(@exam.exam_doc.path, @exam.questionpaperspecs.length, @exam.exam_students.length), :urgent)
+      # Resque.enqueue(HandleFileConversionJob, @exam.exam_doc.path)
+      HandleFileConversionJob.perform(@doc, @course, @exam)
+      redirect_to course_exam_path(@course, @exam)
+    end
   end
 
   # GET /exams/1
   # GET /exams/1.json
   def show
+    @total_exam_jobs = @exam.jobs
+    @teacher_exam_jobs = @total_exam_jobs.where(:teacher_id => current_teacher.id)
+    @complete_total_exam_jobs = 0
+    @complete_teacher_exam_jobs = 0
+    @total_exam_jobs.each do |f|
+      if f.grade?
+        @complete_total_exam_jobs = @complete_total_exam_jobs + 1
+      end
+    end
+
+    @teacher_exam_jobs.each do |f|
+      if f.grade?
+        @complete_teacher_exam_jobs = @complete_teacher_exam_jobs + 1
+      end
+    end
   end
 
   # GET /exams/new
@@ -29,11 +59,14 @@ class ExamsController < ApplicationController
   # POST /exams.json
   def create
     @exam = @course.exams.new(exam_params)
-
+    doc_size = 0
+    @exam.questionpaperspecs.each do |qp|
+      doc_size = doc_size + qp.page
+    end
+    @exam.page_size = doc_size * @course.students.size
     respond_to do |format|
       if @exam.save
-        format.html { redirect_to course_exams_path(@course), notice: 'Exam was successfully created.' }
-        format.html { redirect_to new_course_exam_question_path(@course, @exam), notice: 'Exam was successfully created.' }
+        format.html { redirect_to course_exam_url(@course, @exam), notice: 'Exam was successfully created.' }
         format.json { render :show, status: :created, location: @exam }
       else
         format.html { render :new }
@@ -47,7 +80,7 @@ class ExamsController < ApplicationController
   def update
     respond_to do |format|
       if @exam.update(exam_params)
-        format.html { redirect_to @exam, notice: 'Exam was successfully updated.' }
+        format.html { redirect_to course_exam_url(@course, @exam), notice: 'Exam was successfully updated.' }
         format.json { render :show, status: :ok, location: @exam }
       else
         format.html { render :edit }
@@ -61,44 +94,33 @@ class ExamsController < ApplicationController
   def destroy
     @exam.destroy
     respond_to do |format|
-      format.html { redirect_to course_exams_path(@course), notice: 'Exam was successfully destroyed.' }
+      format.html { redirect_to course_exams_url(@course), notice: 'Exam was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
 
-  def manage
-    @admitted_students = @exam.test_givers.pluck(:name, :roll, :email) || nil
-    respond_to do |format|
-      format.html
-      format.js
+  def attendance_sheet
+    @asheet = @exam.build_attendance_sheet
+  end
+
+  def upload_attendance_sheet
+    @asheet = @exam.build_attendance_sheet(upload_attendance_sheet_params)
+    if @asheet.save
+      redirect_to course_exams_url(@course)
     end
   end
 
-  def send_reminder_mail
+  def see_grade
     @students = @course.students
-    SendExamReminderJob.perform_now(@students, @exam)
-    flash.now[:notice] = "Email Sent to all students!"
-    redirect_to manage_course_exam_path(@course, @exam)
-  end
-
-  def upload_student_attendance_sheet
-    if @exam.update(upload_student_attendance_sheet_params)
-      ProcessAttendanceSheetJob.perform_now(@exam)
-      redirect_to manage_course_exam_path(@course, @exam)
-    else
-      flash[:notice] = @exam.errors.full_messages.first
-      redirect_to manage_course_exam_path(@course, @exam)
-    end
-  end
-
-  def upload_test_papers
-    if @exam.update(upload_test_papers_params)
-      ProcessTestPapersJob.perform_now(@exam)
-      redirect_to manage_course_exam_path(@course, @exam)
-    else
-      flash[:notice] = @exam.errors.full_messages.first
-      redirect_to manage_course_exam_path(@course, @exam)
-    end
+    # @jobs = @exam.jobs
+    # # @grade_book = []
+    # # @students.each do |student|
+    # #   jobs = @jobs.find_all_by(student_id: student.id)
+    # #   jobs.each do |job|
+    # #     @grade_book << job.grade
+    # #   end
+    # # end
+    # # @grades = @students.grades.where(:exam_id => @exam.id)
   end
 
   private
@@ -113,14 +135,14 @@ class ExamsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def exam_params
-      params.require(:exam).permit(:name, :date, :total_marks, :total_questions)
+      params.require(:exam).permit(:name, :date, questionpaperspecs_attributes: [:id, :tag, :marks, :page, :teacher_id, :_destroy])
     end
 
-    def upload_student_attendance_sheet_params
-      params.require(:exam).permit(:attendance_sheet)
+    def upload_doc_submit_params
+      params.require(:exam_doc).permit(:file)
     end
 
-    def upload_test_papers_params
-      params.require(:exam).permit(:test_papers)
+    def upload_attendance_sheet_params
+      params.require(:attendance_sheet).permit(:file)
     end
 end
