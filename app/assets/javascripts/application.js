@@ -17,9 +17,6 @@
 //= require mousetrap.min
 //= require nprogress
 //= require nprogress-turbolinks
-//= require react
-//= require react_ujs
-//= require components
 //= require_tree .
 
 $('#new_question').on('shown.bs.modal', function () {
