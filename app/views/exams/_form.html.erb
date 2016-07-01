@@ -1,14 +1,25 @@
 <%= simple_form_for([@course, @exam]) do |f| %>
   <%= f.error_notification %>
-
   <div class="form-inputs">
-    <%= f.input :name %>
-    <%= f.input :date %>
-    <%= f.input :total_questions %>
-    <%= f.input :total_marks %>
-  </div>
+    <div class="row">
+      <div class="col-md-4">
+        <%= f.input :name %>
+        <%= f.input :date %>
 
-  <div class="form-actions">
-    <%= f.button :submit %>
+        <div class="form-actions">
+          <%= f.button :submit %>
+        </div>
+
+
+      </div>
+      <div class="col-md-offset-1 col-md-7">
+        <% f.simple_fields_for :questionpaperspecs, :html => { :class => 'form-horizontal' } do |questionpaperspec| %>
+          <%= render 'questionpaperspec_fields', f: questionpaperspec %>
+        <% end %>
+        <div class="links">
+          <%= link_to_add_association 'Add Question', f, :questionpaperspecs, class: 'btn btn-default btn-xs' %>
+        </div>
+      </div>
+    </div>
   </div>
 <% end %>

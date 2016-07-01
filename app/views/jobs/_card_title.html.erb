@@ -1,0 +1,27 @@
+<h5 style="text-align: center;font-weight: bold;text-transform: capitalize;"><%= @job.student.name %> </h5>	
+			<h5 style="text-align: center;"> 
+				<% if @job.previous(current_teacher.id).present? %>
+					<a id="js-left" href="<%= job_grade_path(@job.previous(current_teacher.id))  %>">
+					<span  class="mega-octicon really-more-mega octicon-arrow-left" style="float: left;"></span></a>
+				<% end %>
+					<span style="font-size: 16px; background-color: #333; color: #fff; padding: 5px 20px;"><%= @job.student.roll %></span>
+				<% if @job.next(current_teacher.id).present? %>
+					<a id="js-right" href="<%=job_grade_path(@job.next(current_teacher.id)) %>">
+					<span class="mega-octicon really-more-mega octicon-arrow-right" style="float: right;"></span></a>
+				<% end %>
+</h5> 	
+<h4 style="text-align: center;"><%= @job.questionpaperspec.tag %> </h4>
+
+<script type="text/javascript">
+	$(document).ready(function(){
+		Mousetrap.bind('right', function(){
+	    	$('#js-right')[0].click();
+		});
+	    
+	    Mousetrap.bind('left', function(){
+	    	$('#js-left')[0].click();
+	    });
+
+	   
+	})
+</script>

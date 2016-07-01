@@ -1,0 +1,22 @@
+<div class="row">
+	<div class="col-md-8">
+		<canvas id="canvas" width="800" height="1050" style="background: url(<%= @job.file.to_s %>); no-repeat; border:1px solid #000000"></canvas>
+	</div>
+
+	<script type="text/javascript">
+		var sketch = new Sketch("canvas");
+		var a = <%= @job.grade.annotation ? @job.grade.annotation.gsub(/\"/, "") : 0 %>;
+		sketch.loadJSON(a);
+	</script>
+	<div class="col-md-offset-1 col-md-3">
+		<div class="card card-block" style="position: fixed;">
+			<%= render 'card_title' %>
+			<h1 style="text-align: center;"><%= @job.grade.mark %></h1>
+			<h1 style="text-align: center;">------</h1>
+			<h1 style="text-align: center;"><%= @job.questionpaperspec.marks.to_s %></h1>
+			<p class="card-text"><%= @job.grade.comment %></p>
+		</div>
+	</div>
+</div>
+
+<%= link_to 'Back', grades_path %>

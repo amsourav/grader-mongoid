@@ -1,0 +1,31 @@
+<% if current_teacher %>
+	<table class="table table-striped">
+		<thead>
+			<tr>
+				<th>Course</th>
+				<th>Exam</th>
+				<th>Student</th>
+				<th>Question No</th>
+				<th>Marks</th>
+				<th colspan="4"></th>
+			</tr>
+		</thead>
+
+		<tbody>
+			<% @jobs.each do |job| %>
+			<tr>
+				<td><%= job.exam.course.name %></td>
+				<td><%= job.exam.name %></td>
+				<td><%= job.student.name %></td>
+				<td><%= job.questionpaperspec.tag %></td>
+				<td><%= job.questionpaperspec.marks %></td>
+				<% if job.grade? %>
+					<td><%= link_to 'Graded', job, class: 'btn btn-danger' %></td>
+				<% else %>
+					<td><%= link_to 'Grade', job_grade_path(job), class: 'btn btn-info' %></td>
+				<% end %>
+			</tr>
+			<% end %>
+		</tbody>
+	</table>
+<% end %>

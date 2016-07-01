@@ -1,12 +1,10 @@
 class Student
   include Mongoid::Document
   include Mongoid::Timestamps
-
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
-  devise :database_authenticatable,
-         :recoverable, :rememberable, :trackable,
-         :validatable, :invitable
+  devise :database_authenticatable, :registerable,
+         :recoverable, :rememberable, :trackable, :validatable
 
   ## Database authenticatable
   field :email,              type: String, default: ""
@@ -31,23 +29,17 @@ class Student
   field :name, type: String
 
   has_and_belongs_to_many :courses
+  
+  has_many :jobs
+  has_many :grades
 
-  # Confirmable
-  field :confirmation_token,   type: String
-  field :confirmed_at,         type: Time
-  field :confirmation_sent_at, type: Time
-  field :unconfirmed_email,    type: String # Only if using reconfirmable
 
-  field :invitation_token, type: String
-  field :invitation_created_at, type: Time
-  field :invitation_sent_at, type: Time
-  field :invitation_accepted_at, type: Time
-  field :invitation_limit, type: Integer
+  ## Confirmable
+  # field :confirmation_token,   type: String
+  # field :confirmed_at,         type: Time
+  # field :confirmation_sent_at, type: Time
+  # field :unconfirmed_email,    type: String # Only if using reconfirmable
 
-  index( {invitation_token: 1}, {:background => true} )
-  index( {invitation_by_id: 1}, {:background => true} )
-
-  has_and_belongs_to_many :exams
   ## Lockable
   # field :failed_attempts, type: Integer, default: 0 # Only if lock strategy is :failed_attempts
   # field :unlock_token,    type: String # Only if unlock strategy is :email or :both

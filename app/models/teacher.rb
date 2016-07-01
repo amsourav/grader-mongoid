@@ -1,10 +1,9 @@
 class Teacher
   include Mongoid::Document
   include Mongoid::Timestamps
-
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
-  devise :database_authenticatable, :registerable, :confirmable,
+  devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
   ## Database authenticatable
@@ -25,20 +24,19 @@ class Teacher
   field :current_sign_in_ip, type: String
   field :last_sign_in_ip,    type: String
 
-  # Confirmable
-  field :confirmation_token,   type: String
-  field :confirmed_at,         type: Time
-  field :confirmation_sent_at, type: Time
-  field :unconfirmed_email,    type: String # Only if using reconfirmable
+  ## Confirmable
+  # field :confirmation_token,   type: String
+  # field :confirmed_at,         type: Time
+  # field :confirmation_sent_at, type: Time
+  # field :unconfirmed_email,    type: String # Only if using reconfirmable
 
   ## Lockable
   # field :failed_attempts, type: Integer, default: 0 # Only if lock strategy is :failed_attempts
   # field :unlock_token,    type: String # Only if unlock strategy is :email or :both
   # field :locked_at,       type: Time
+  embeds_one :teacher_profile
   has_many :courses, dependent: :destroy
-  has_many :questions
-
-  def name_of_teacher
-    self.email
-  end
+  has_many :questionpaperspecs, dependent: :destroy
+  has_many :jobs
+  has_many :grades
 end
