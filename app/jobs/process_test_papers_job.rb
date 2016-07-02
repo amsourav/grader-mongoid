@@ -1,15 +1,10 @@
 class ProcessTestPapersJob < ActiveJob::Base
   queue_as :default
-
   def perform(exam)
     students = exam.test_givers
     questions = exam.questions
 
-    no_of_students = students.length
-    no_of_question = questions.length
-
     no_of_pages_per_student = questions.pluck(:pages).sum
-    total_no_of_pages = no_of_pages_per_student * no_of_students
 
     document = PDFShaver::Document.new(exam.test_papers.file.path)
     dir = File.dirname(exam.test_papers.file.path)
@@ -21,11 +16,14 @@ class ProcessTestPapersJob < ActiveJob::Base
 
     pages.each do |page|
       dimensions = page.extract_dimensions_from_gm_geometry_string('800x')
+      # Hiding files like a boss
       out_path = File.join(dir,"#{page.index}_#{Digest::SHA1.hexdigest((rand(12123123423) * Time.now.to_i).to_s)}.jpg")
       page.render(out_path, dimensions)
       split_images << out_path
     end
 
+    # I dont know what I did here, but this shit is working after 2 months of intense
+    # head-banging and hair-pulling. Please someone optimize this shit.
     var = 0
     students.each do |student|
       exam_sheet_group = split_images[var..(var+no_of_pages_per_student-1)]
