@@ -1,4 +1,8 @@
 class Job
   include Mongoid::Document
-  field :name, type: String
+  field :images, type: Array
+
+  belongs_to :question
+  belongs_to :student
+  belongs_to :teacher
 end

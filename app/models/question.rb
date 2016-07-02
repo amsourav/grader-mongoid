@@ -10,5 +10,6 @@ class Question
   belongs_to :teacher
 
   has_many :part_questions
+  has_many :jobs
   accepts_nested_attributes_for :part_questions, reject_if: :all_blank, allow_destroy: true
 end

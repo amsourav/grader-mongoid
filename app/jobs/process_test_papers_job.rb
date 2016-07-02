@@ -17,38 +17,29 @@ class ProcessTestPapersJob < ActiveJob::Base
 
     pages = pages[0..total_no_of_pages-1]
 
+    split_images = []
 
-    # @page_shift = 0
-    # students.each do |student|
-    #   (0..(no_of_pages_per_student-1)).each do |k|
-    #     pages[@page_shift..no_of_pages_per_student-1].each do |page|
-    #       dimensions = page.extract_dimensions_from_gm_geometry_string('1000x')
-    #       out_path = File.join(dir,"#{student.roll}_#{k}.jpg")
-    #       page.render(out_path, dimensions)
-    #     end
-    #     @page_shift = (@page_shift + no_of_pages_per_student)
-    #   end
-    # end
+    pages.each do |page|
+      dimensions = page.extract_dimensions_from_gm_geometry_string('800x')
+      out_path = File.join(dir,"#{page.index}_#{Digest::SHA1.hexdigest((rand(12123123423) * Time.now.to_i).to_s)}.jpg")
+      page.render(out_path, dimensions)
+      split_images << out_path
+    end
 
-    
-
-    # debugger
-    #   page_shift = 0
-    #   students.each do |student|
-    #     questions.each do |question|
-    #         pages_subset = pages[page_shift..(page_shift + no_of_pages_per_student)-1]
-    #         k = 0
-    #         if pages_subset == nil
-    #           break
-    #         end
-    #         pages_subset.each do |page|
-    #           dimensions = page.extract_dimensions_from_gm_geometry_string('1000x')
-    #           out_path = File.join(dir,"#{student.roll}_#{k}.jpg")
-    #           page.render(out_path, dimensions)
-    #           k = k + 1
-    #         end
-    #         page_shift = (page_shift + no_of_pages_per_student)
-    #     end
-    #   end
+    var = 0
+    students.each do |student|
+      exam_sheet_group = split_images[var..(var+no_of_pages_per_student-1)]
+      q_var = 0
+      questions.each do |question|
+        question_exam_sheet_group = exam_sheet_group[q_var..(q_var+question.pages-1)]
+        Job.create!(teacher_id: question.teacher.id,
+          student_id: student.id,
+          question_id: question.id,
+          images: question_exam_sheet_group
+        )
+        q_var = q_var+question.pages
+      end
+      var = var+no_of_pages_per_student
+    end
   end
 end
