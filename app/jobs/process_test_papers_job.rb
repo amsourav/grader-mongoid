@@ -23,7 +23,7 @@ class ProcessTestPapersJob < ActiveJob::Base
       # Hiding files like a boss
       out_path = File.join(dir,"#{page.index}_#{Digest::SHA1.hexdigest((rand(12123123423) * Time.now.to_i).to_s)}.jpg")
       page.render(out_path, dimensions)
-      split_images << out_path
+      split_images << out_path.split('/public')[1]
     end
 
 
@@ -36,6 +36,8 @@ class ProcessTestPapersJob < ActiveJob::Base
         Job.create!(teacher_id: question.teacher.id,
           student_id: student.id,
           question_id: question.id,
+          exam_id: exam.id,
+          course_id: exam.course.id,
           images: question_exam_sheet_group
         )
         q_var = q_var+question.pages

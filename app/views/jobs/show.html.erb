@@ -1,9 +1,31 @@
-<p id="notice"><%= notice %></p>
+<div class="row">
+  <div class="col-md-8">
+    <% @job.images.each.with_index do |image, index| %>
+      <canvas class="mousetrap" id="<%= index.to_s + '_' +@job.id.to_s %>" width="800" height="1025" \
+       style="background: url(<%= image %>); no-repeat; border:1px solid #000000"></canvas>
+    <% end %>
+  </div>
 
-<p>
-  <strong>Name:</strong>
-  <%= @job.name %>
-</p>
+  <div class="col-md-offset-1 col-md-3">
+    <%= link_to 'Back', jobs_path %>
+    <div class="card" style="position: fixed; width: 250px;>
+      <div class="card-block">
+        <div class="card-title">
+          <% if @job.previous(current_teacher.id).present? %>
+            <a id="js-left" href="<%= job_path(@job.previous(current_teacher.id))  %>">
+            <span  class="mega-octicon really-more-mega octicon-arrow-left" style="float: left;"></span></a>
+          <% end %>
+          <% if @job.next(current_teacher.id).present? %>
+            <a id="js-right" href="<%=job_path(@job.next(current_teacher.id)) %>">
+            <span class="mega-octicon really-more-mega octicon-arrow-right" style="float: right;"></span></a>
+          <% end %>
+        </div>
 
-<%= link_to 'Edit', edit_job_path(@job) %> |
-<%= link_to 'Back', jobs_path %>
+        <div class="card-text">
+            <%= @question.inspect %>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>

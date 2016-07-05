@@ -1,5 +1,6 @@
 source 'https://rubygems.org'
 
+gem 'foreman'
 gem 'mongoid-slug'
 gem 'thin'
 gem 'react-rails'

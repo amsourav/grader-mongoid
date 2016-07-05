@@ -83,7 +83,7 @@ class ExamsController < ApplicationController
 
   def upload_student_attendance_sheet
     if @exam.update(upload_student_attendance_sheet_params)
-      ProcessAttendanceSheetJob.perform_now(@exam)
+      ProcessAttendanceSheetJob.delay.perform_now(@exam)
       redirect_to manage_course_exam_path(@course, @exam)
     else
       flash[:notice] = @exam.errors.full_messages.first
@@ -93,7 +93,7 @@ class ExamsController < ApplicationController
 
   def upload_test_papers
     if @exam.update(upload_test_papers_params)
-      ProcessTestPapersJob.perform_now(@exam)
+      ProcessTestPapersJob.delay.perform_now(@exam)
       redirect_to manage_course_exam_path(@course, @exam)
     else
       flash[:notice] = @exam.errors.full_messages.first

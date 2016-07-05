@@ -14,4 +14,5 @@ class Course
   has_many :exams, dependent: :destroy
   has_one :student_roster
   has_and_belongs_to_many :students
+  has_many :jobs
 end
