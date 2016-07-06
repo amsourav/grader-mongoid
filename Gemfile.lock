@@ -197,7 +197,6 @@ GEM
     nokogiri (1.6.8)
       mini_portile2 (~> 2.1.0)
       pkg-config (~> 1.1.7)
-    nprogress-rails (0.1.6.7)
     octicons-rails (2.1.1)
       railties (>= 3.2, < 5.0)
     origin (2.2.0)
@@ -364,7 +363,6 @@ DEPENDENCIES
   lograge
   mongoid
   mongoid-slug
-  nprogress-rails
   octicons-rails
   pdfshaver
   pry-rails

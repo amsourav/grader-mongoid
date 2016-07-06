@@ -2,12 +2,6 @@
   <thead>
     <tr>
       <th>
-        Course
-      </th>
-      <th>
-        Exam
-      </th>
-      <th>
         Student
       </th>
       <th>Question</th>
@@ -25,12 +19,6 @@
     <% @jobs.each do |job| %>
       <tr>
         <td>
-          <%= job.course.code %>
-        </td>
-        <td>
-          <%= job.exam.name %>
-        </td>
-        <td>
           <%= job.student.name %>
         </td>
         <td>
@@ -42,7 +30,7 @@
         <td>
           <%= job.question.pages %>
         </td>
-        <td><%= link_to 'Show', job %></td>
+        <td><%= link_to 'Show', course_exam_job_path(@course, @exam, job) %></td>
       </tr>
     <% end %>
   </tbody>

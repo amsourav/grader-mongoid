@@ -8236,112 +8236,23 @@ a.bg-danger:focus, a.bg-danger:hover {
 }
 
 /* ⚡ */
-/* Make clicks pass-through */
-/* line 6, /home/j.tanvi/.rbenv/versions/2.3.0/lib/ruby/gems/2.3.0/gems/nprogress-rails-0.1.6.7/app/assets/stylesheets/nprogress.scss */
-#nprogress {
-  pointer-events: none;
-}
-
-/* line 10, /home/j.tanvi/.rbenv/versions/2.3.0/lib/ruby/gems/2.3.0/gems/nprogress-rails-0.1.6.7/app/assets/stylesheets/nprogress.scss */
-#nprogress .bar {
-  background: #29d;
-  position: fixed;
-  z-index: 100;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 2px;
-}
-
-/* Fancy blur effect */
-/* line 23, /home/j.tanvi/.rbenv/versions/2.3.0/lib/ruby/gems/2.3.0/gems/nprogress-rails-0.1.6.7/app/assets/stylesheets/nprogress.scss */
-#nprogress .peg {
-  display: block;
-  position: absolute;
-  right: 0px;
-  width: 100px;
-  height: 100%;
-  box-shadow: 0 0 10px #29d, 0 0 5px #29d;
-  opacity: 1.0;
-  -webkit-transform: rotate(3deg) translate(0px, -4px);
-  -ms-transform: rotate(3deg) translate(0px, -4px);
-  transform: rotate(3deg) translate(0px, -4px);
-}
-
-/* Remove these to get rid of the spinner */
-/* line 38, /home/j.tanvi/.rbenv/versions/2.3.0/lib/ruby/gems/2.3.0/gems/nprogress-rails-0.1.6.7/app/assets/stylesheets/nprogress.scss */
-#nprogress .spinner {
-  display: block;
-  position: fixed;
-  z-index: 100;
-  top: 15px;
-  right: 15px;
-}
-
-/* line 46, /home/j.tanvi/.rbenv/versions/2.3.0/lib/ruby/gems/2.3.0/gems/nprogress-rails-0.1.6.7/app/assets/stylesheets/nprogress.scss */
-#nprogress .spinner-icon {
-  width: 18px;
-  height: 18px;
-  box-sizing: border-box;
-  border: solid 2px transparent;
-  border-top-color: #29d;
-  border-left-color: #29d;
-  border-radius: 50%;
-  -webkit-animation: nprogress-spinner 400ms linear infinite;
-  animation: nprogress-spinner 400ms linear infinite;
-}
-
-/* line 60, /home/j.tanvi/.rbenv/versions/2.3.0/lib/ruby/gems/2.3.0/gems/nprogress-rails-0.1.6.7/app/assets/stylesheets/nprogress.scss */
-.nprogress-custom-parent {
-  overflow: hidden;
-  position: relative;
-}
-
-/* line 65, /home/j.tanvi/.rbenv/versions/2.3.0/lib/ruby/gems/2.3.0/gems/nprogress-rails-0.1.6.7/app/assets/stylesheets/nprogress.scss */
-.nprogress-custom-parent #nprogress .spinner,
-.nprogress-custom-parent #nprogress .bar {
-  position: absolute;
-}
-
-@-webkit-keyframes nprogress-spinner {
-  0% {
-    -webkit-transform: rotate(0deg);
-  }
-  100% {
-    -webkit-transform: rotate(360deg);
-  }
-}
-@keyframes nprogress-spinner {
-  0% {
-    transform: rotate(0deg);
-  }
-  100% {
-    transform: rotate(360deg);
-  }
-}
-/* line 1, /home/j.tanvi/.rbenv/versions/2.3.0/lib/ruby/gems/2.3.0/gems/nprogress-rails-0.1.6.7/app/assets/stylesheets/nprogress-bootstrap.css */
-#nprogress .bar,
-#nprogress .spinner {
-  z-index: 999999;
-}
-
-/* line 6, /home/j.tanvi/project/grader-mongoid/app/assets/stylesheets/application.scss */
+/* line 3, /home/j.tanvi/project/grader-mongoid/app/assets/stylesheets/application.scss */
 html, body {
   height: 100%;
 }
 
-/* line 10, /home/j.tanvi/project/grader-mongoid/app/assets/stylesheets/application.scss */
+/* line 7, /home/j.tanvi/project/grader-mongoid/app/assets/stylesheets/application.scss */
 .navbar-toggle {
   float: left;
   margin-left: 15px;
 }
 
-/* line 15, /home/j.tanvi/project/grader-mongoid/app/assets/stylesheets/application.scss */
+/* line 12, /home/j.tanvi/project/grader-mongoid/app/assets/stylesheets/application.scss */
 .navmenu {
   z-index: 1;
 }
 
-/* line 19, /home/j.tanvi/project/grader-mongoid/app/assets/stylesheets/application.scss */
+/* line 16, /home/j.tanvi/project/grader-mongoid/app/assets/stylesheets/application.scss */
 .canvas {
   position: relative;
   left: 0;
@@ -8352,26 +8263,26 @@ html, body {
 }
 
 @media (min-width: 0) {
-  /* line 29, /home/j.tanvi/project/grader-mongoid/app/assets/stylesheets/application.scss */
+  /* line 26, /home/j.tanvi/project/grader-mongoid/app/assets/stylesheets/application.scss */
   .navbar-toggle {
     display: block;
     /* force showing the toggle */
   }
 }
 @media (min-width: 992px) {
-  /* line 35, /home/j.tanvi/project/grader-mongoid/app/assets/stylesheets/application.scss */
+  /* line 32, /home/j.tanvi/project/grader-mongoid/app/assets/stylesheets/application.scss */
   body {
     padding: 0;
   }
 
-  /* line 38, /home/j.tanvi/project/grader-mongoid/app/assets/stylesheets/application.scss */
+  /* line 35, /home/j.tanvi/project/grader-mongoid/app/assets/stylesheets/application.scss */
   .navbar {
     right: auto;
     background: none;
     border: none;
   }
 
-  /* line 43, /home/j.tanvi/project/grader-mongoid/app/assets/stylesheets/application.scss */
+  /* line 40, /home/j.tanvi/project/grader-mongoid/app/assets/stylesheets/application.scss */
   .canvas {
     padding: 0;
   }

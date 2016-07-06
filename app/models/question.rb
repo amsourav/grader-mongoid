@@ -9,7 +9,7 @@ class Question
   belongs_to :exam
   belongs_to :teacher
 
-  has_many :part_questions
+  has_many :part_questions, dependent: :destroy
   has_many :jobs
   accepts_nested_attributes_for :part_questions, reject_if: :all_blank, allow_destroy: true
 end

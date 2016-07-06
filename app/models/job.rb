@@ -8,11 +8,24 @@ class Job
   belongs_to :exam
   belongs_to :course
 
-  def next(teacher_id)
-    self.class.where(:teacher_id => teacher_id).where(:_id.gt => self._id).order_by(:question_id => 'asce').limit(1).first
+  def next(teacher_id, exam_id)
+    links = self.link_array(teacher_id, exam_id)
+    current_index = links.index(self.id)
+    return links[current_index + 1]
   end
 
-  def previous(teacher_id)
-    self.class.where(:teacher_id => teacher_id).where(:_id.lt => self._id).order_by(:question_id => 'asce').limit(1).first
+  def previous(teacher_id, exam_id)
+    links = self.link_array(teacher_id, exam_id)
+    current_index = links.index(self.id)
+    if current_index == 0
+      return nil
+    else
+      return links[current_index - 1]
+    end
+  end
+
+  def link_array(teacher_id, exam_id)
+    self.class.where(teacher_id: teacher.id).where(exam_id: exam_id).
+          order_by(:question_id => 'asce').pluck(:id)
   end
 end

@@ -1,1 +1,2 @@
-delayed_job: ./bin/delayed_job start
+web: bundle exec rails server
+worker: bundle exec rake jobs:work

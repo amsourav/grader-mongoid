@@ -4,7 +4,6 @@ gem 'foreman'
 gem 'mongoid-slug'
 gem 'thin'
 gem 'react-rails'
-gem 'nprogress-rails'
 gem "skylight"
 gem 'faster_path'
 gem 'active_model_serializers'

@@ -1,6 +1,5 @@
 Rails.application.routes.draw do
 
-  resources :jobs, only: [:index, :show]
   get 'home/index'
   root 'home#index'
 
@@ -22,6 +21,7 @@ Rails.application.routes.draw do
         patch 'upload_test_papers'
       end
       resources :questions, shallow: true
+      resources :jobs, only: [:index, :show]
     end
   end
 end
