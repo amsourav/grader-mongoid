@@ -1,5 +1,15 @@
 source 'https://rubygems.org'
 
+
+gem 'foreman'
+gem 'mongoid-slug'
+gem 'thin'
+gem 'react-rails'
+gem "skylight"
+gem 'faster_path'
+gem 'active_model_serializers'
+gem 'sprockets-es6'
+gem 'delayed_job_mongoid'
 gem 'mongoid'
 gem 'devise'
 gem 'thin'
@@ -23,6 +33,8 @@ gem 'therubyracer', platforms: :ruby
 gem 'jquery-rails'
 gem 'jbuilder', '~> 2.0'
 gem 'sdoc', '~> 0.4.0', group: :doc
+gem 'letter_opener'
+gem 'letter_opener_web'
 
 group :development, :test do
   gem 'byebug'

@@ -1,4 +1,5 @@
 <div class="row">
+<<<<<<< HEAD
 	<div class="col-md-8">
 		<canvas id="canvas" width="800" height="1050" style="background: url(<%= @job.file.to_s %>); no-repeat; border:1px solid #000000"></canvas>
 	</div>
@@ -23,3 +24,83 @@
 	</div>
 	</div>
 </div>
+=======
+  <div class="col-md-8">
+    <% @job.images.each.with_index do |image, index| %>
+      <canvas class="mousetrap" id="<%= index.to_s + '_' +@job.id.to_s %>" width="800" height="1025" \
+       style="background: url(<%= image %>); no-repeat; border:1px solid #000000"></canvas>
+    <% end %>
+  </div>
+
+  <div class="col-md-offset-1 col-md-3">
+    <div class="row">
+      <div class="card" style="position: fixed; width: 250px;">
+        <div class="card-block">
+          <%= link_to 'Back', course_exam_jobs_path(@course, @exam) %>
+          <div class="card-title">
+            <% if @job.previous(current_teacher.id, @exam.id).present? %>
+              <a id="js-left" href="<%= course_exam_job_path(@course, @exam, @job.previous(current_teacher.id, @exam.id))  %>">
+              <span  class="mega-octicon really-more-mega octicon-arrow-left" style="float: left;"></span></a>
+            <% end %>
+            <% if @job.next(current_teacher.id, @exam.id).present? %>
+              <a id="js-right" href="<%= course_exam_job_path(@course, @exam, @job.next(current_teacher.id, @exam)) %>">
+              <span class="mega-octicon really-more-mega octicon-arrow-right" style="float: right;"></span></a>
+            <% end %>
+          </div>
+
+          <div class="card-text">
+            <h1 style="text-align: center;"><%= @question.mark %></h1>
+              =======================
+              <h4 style="text-align: center;">Rubric</h4>
+              <% @pqs.each do |pq|  %>
+                <li><%= pq.sub_tag %> - <%= pq.mark %></li>
+              <% end %>
+              <%= simple_form_for @grade, :url => post_grade_course_exam_job_path(@course, @exam, @job), method: :post do |f| %>
+                <%= f.input :assigned_marks, label: "Marks" %>
+                <%= f.hidden_field :teacher_id,  input_html: { value: current_teacher.id } %>
+                <%= f.hidden_field :student_id, input_html: { value: @job.student.id } %>
+                <%= f.hidden_field :course_id, input_html: { value: @course.id } %>
+                <%= f.hidden_field :job_id, input_html: { value: @job.id } %>
+                <%= f.hidden_field :exam_id, input_html: { value: @exam.id } %>
+                <%= f.submit class: 'btn btn-default' %>
+              <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script type="text/javascript">
+	$(document).ready(function() {
+		var canvas = $('.mousetrap')[0];
+		paper.setup(canvas);
+    var path;
+    var tool = new paper.Tool();
+    tool.minDistance = 20;
+    tool.onMouseDown = function(event) {
+      if (path) {
+		      path.selected = false;
+	    };
+      path = new paper.Path();
+    	path.strokeColor = 'black';
+    }
+    tool.onMouseDrag = function(event) {
+    	path.add(event.point);
+    }
+    tool.onMouseUp = function(event) {
+    	path.smooth();
+    }
+    tool.onKeyDown = function(event) {
+      if(paper.Key.isDown('a')) {
+          export_json = path
+		      console.log(path)
+      }
+
+      if(paper.Key.isDown('r')){
+        path.strokeColor = 'red';
+      }
+    }
+	});
+</script>
+>>>>>>> test_paper_processor

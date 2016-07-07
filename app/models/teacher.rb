@@ -36,7 +36,17 @@ class Teacher
   # field :locked_at,       type: Time
   embeds_one :teacher_profile
   has_many :courses, dependent: :destroy
+<<<<<<< HEAD
   has_many :questionpaperspecs, dependent: :destroy
   has_many :jobs
   has_many :grades
+=======
+  has_many :questions
+  has_many :jobs
+  has_many :grades
+
+  def name_of_teacher
+    self.email
+  end
+>>>>>>> test_paper_processor
 end

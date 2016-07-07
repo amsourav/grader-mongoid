@@ -4,7 +4,12 @@
   <title>Grader</title>
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+<<<<<<< HEAD
+=======
+  <%= javascript_include_tag 'cocoon' %>
+>>>>>>> test_paper_processor
   <%= csrf_meta_tags %>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/paper.js/0.9.25/paper-full.min.js"></script>
 </head>
 <body>
   <%= render 'layouts/header' %>
@@ -14,6 +19,7 @@
     <p class="alert alert-info"><%= notice %></p>
   <% end %>
   <%= yield %>
+  <% console %>
 </div>
 </body>
 </html>

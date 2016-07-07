@@ -40,6 +40,12 @@ class Student
   # field :confirmation_sent_at, type: Time
   # field :unconfirmed_email,    type: String # Only if using reconfirmable
 
+<<<<<<< HEAD
+=======
+  has_and_belongs_to_many :exams
+  has_many :jobs
+  has_many :grades
+>>>>>>> test_paper_processor
   ## Lockable
   # field :failed_attempts, type: Integer, default: 0 # Only if lock strategy is :failed_attempts
   # field :unlock_token,    type: String # Only if unlock strategy is :email or :both

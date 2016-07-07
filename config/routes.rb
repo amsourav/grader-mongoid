@@ -17,12 +17,22 @@ Rails.application.routes.draw do
         post 'upload_doc_submit'
         post 'upload_attendance_sheet'
       end
+<<<<<<< HEAD
     end
 
     member do
       get 'student_roster'
       post 'upload_student_roster'
       post 'add_teacher'
+=======
+      resources :questions, shallow: true
+      resources :jobs, only: [:index, :show] do
+        member do
+          post 'post_grade'
+          patch 'patch_grade'
+        end
+      end
+>>>>>>> test_paper_processor
     end
   end
   devise_for :students

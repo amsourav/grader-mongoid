@@ -1,0 +1,17 @@
+source "https://rubygems.org"
+
+# chef
+# https://github.com/opscode/chef
+gem 'chef'
+
+# knife-solo
+# http://matschaffer.github.io/knife-solo/
+gem 'knife-solo'
+
+# knife-solo_data_bag
+# http://thbishop.com/knife-solo_data_bag/
+gem 'knife-solo_data_bag'
+
+# librarian-chef
+# https://github.com/applicationsonline/librarian-chef
+gem 'librarian-chef'

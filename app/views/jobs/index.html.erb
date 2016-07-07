@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <% if current_teacher %>
 	<table class="table table-striped">
 		<thead>
@@ -29,3 +30,44 @@
 		</tbody>
 	</table>
 <% end %>
+=======
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>
+        Student
+      </th>
+      <th>Question</th>
+      <th>
+          Marks
+      </th>
+      <th>
+        Pages
+      </th>
+      <th colspan="1"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @jobs.each do |job| %>
+      <tr>
+        <td>
+          <%= job.student.name %>
+        </td>
+        <td>
+          <%= job.question.tag %>
+        </td>
+        <td>
+          <%= job.question.mark %>
+        </td>
+        <td>
+          <%= job.question.pages %>
+        </td>
+        <td><%= link_to 'Show', course_exam_job_path(@course, @exam, job) %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+>>>>>>> test_paper_processor

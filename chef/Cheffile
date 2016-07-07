@@ -1,0 +1,9 @@
+site 'http://community.opscode.com/api/v1'
+
+cookbook 'build-essential'
+cookbook 'apt'
+cookbook 'ark'
+cookbook 'nginx'
+cookbook 'curl'
+cookbook 'chef-mongodb'
+cookbook 'rbenv'

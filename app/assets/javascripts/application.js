@@ -14,8 +14,11 @@
 //= require jquery_ujs
 //= require turbolinks
 //= require bootstrap
-//= require jasny-bootstrap
 //= require mousetrap.min
-//= require mark
-//= require cocoon
 //= require_tree .
+
+$('#new_question').on('shown.bs.modal', function () {
+//  $('#tag').focus()
+})
+
+var export_json;

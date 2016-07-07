@@ -103,6 +103,7 @@ class ExamsController < ApplicationController
     @asheet = @exam.build_attendance_sheet
   end
 
+<<<<<<< HEAD
   def upload_attendance_sheet
     @asheet = @exam.build_attendance_sheet(upload_attendance_sheet_params)
     if @asheet.save
@@ -121,6 +122,26 @@ class ExamsController < ApplicationController
     # #   end
     # # end
     # # @grades = @students.grades.where(:exam_id => @exam.id)
+=======
+  def upload_student_attendance_sheet
+    if @exam.update(upload_student_attendance_sheet_params)
+      ProcessAttendanceSheetJob.delay.perform_now(@exam)
+      redirect_to manage_course_exam_path(@course, @exam)
+    else
+      flash[:notice] = @exam.errors.full_messages.first
+      redirect_to manage_course_exam_path(@course, @exam)
+    end
+  end
+
+  def upload_test_papers
+    if @exam.update(upload_test_papers_params)
+      ProcessTestPapersJob.delay.perform_now(@exam)
+      redirect_to manage_course_exam_path(@course, @exam)
+    else
+      flash[:notice] = @exam.errors.full_messages.first
+      redirect_to manage_course_exam_path(@course, @exam)
+    end
+>>>>>>> test_paper_processor
   end
 
   private
