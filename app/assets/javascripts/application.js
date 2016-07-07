@@ -20,3 +20,5 @@
 $('#new_question').on('shown.bs.modal', function () {
 //  $('#tag').focus()
 })
+
+var export_json;

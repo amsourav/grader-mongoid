@@ -21,7 +21,12 @@ Rails.application.routes.draw do
         patch 'upload_test_papers'
       end
       resources :questions, shallow: true
-      resources :jobs, only: [:index, :show]
+      resources :jobs, only: [:index, :show] do
+        member do
+          post 'post_grade'
+          patch 'patch_grade'
+        end
+      end
     end
   end
 end

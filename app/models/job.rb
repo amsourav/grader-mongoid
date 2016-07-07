@@ -8,6 +8,8 @@ class Job
   belongs_to :exam
   belongs_to :course
 
+  has_one :grade
+
   def next(teacher_id, exam_id)
     links = self.link_array(teacher_id, exam_id)
     current_index = links.index(self.id)

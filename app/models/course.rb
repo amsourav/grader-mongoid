@@ -15,4 +15,5 @@ class Course
   has_one :student_roster
   has_and_belongs_to_many :students
   has_many :jobs
+  has_many :grades
 end

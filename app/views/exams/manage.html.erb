@@ -43,6 +43,16 @@
       <%= f.submit "Upload", class: 'btn btn-primary' %>
     <% end %>
   </div>
+
+  <br>
+
+  <div align="center">
+    <% if @exam.jobs == [] %>
+      <h1>Upload Answer Scripts to Start Grading</h1>
+    <% else %>
+      <%= link_to 'Start Grading', course_exam_jobs_path(@course, @exam), class: "btn btn-success-outline" %>
+    <% end %>
+  </div>
 </div>
 
 <div class="modal fade" id="send_reminder" >
