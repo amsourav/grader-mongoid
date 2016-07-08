@@ -1,5 +1,10 @@
 source 'https://rubygems.org'
 
+gem 'descriptive_statistics'
+gem 'chartkick'
+gem 'hightop'
+gem 'groupdate'
+
 gem 'foreman'
 gem 'mongoid-slug'
 gem 'thin'

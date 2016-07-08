@@ -26,6 +26,9 @@ Rails.application.routes.draw do
           post 'post_grade'
           patch 'patch_grade'
         end
+        collection do
+          get 'progress'
+        end
       end
     end
   end

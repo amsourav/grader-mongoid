@@ -1,0 +1,63 @@
+<div style="text-align:center;">
+<%= link_to 'Grading Jobs ',  course_exam_jobs_path(@course, @exam), class: 'btn btn-info-outline' %>
+<div style="float: right;">
+  <%= link_to 'Manage Exam', manage_course_exam_path(@course, @exam), class: 'btn btn-warning-outline' %>
+</div>
+</div>
+
+<br>
+
+<div class="container">
+  <div class="row">
+
+      <div class="col-md-4">
+        <div class="card">
+          <div class="card-block">
+            <div class="card-header">
+              <h1 style="text-align: center;">Exam Statistics</h1>
+            </div>
+            <br>
+            <div class="card-text">
+              <% @questions.each do |question| %>
+              <ul>
+                <%= question.tag %>
+                <li>Mean: <%= question_chart_json(question).mean %> </li>
+                <li>Median: <%= question_chart_json(question).median %></li>
+                <li>Mode: <%= question_chart_json(question).mode%></li>
+              </ul>
+              <% end %>
+              <ul>
+                Total
+                <ul>
+                  <li>Mean: <%= total_marks_statitics(@questions).mean %> </li>
+                  <li>Median: <%=  total_marks_statitics(@questions).median  %></li>
+                  <li>Mode: <%= total_marks_statitics(@questions).mode %></li>
+                </ul>
+              </ul>
+
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-8">
+              <%= pie_chart ({ "Complete" => total_jobs_completed_count ,
+                              "Incomplete" => (total_jobs_count - total_jobs_completed_count) }) %>
+      </div>
+  </div>
+
+  <br>
+
+  <div class="row">
+    Exam Performance of all students
+    <%= column_chart total_marks_statitics(@questions) %>
+  </div>
+
+  <div class="row">
+    <% @questions.each do |question| %>
+      <%= question.tag %>
+      <%= column_chart question_chart_json(question) %>
+    <% end %>
+  </div>
+
+</div>

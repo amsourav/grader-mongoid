@@ -30,7 +30,7 @@
                 <li><%= pq.sub_tag %> - <%= pq.mark %></li>
               <% end %>
               <%= simple_form_for @grade, :url => post_grade_course_exam_job_path(@course, @exam, @job), method: :post do |f| %>
-                <%= f.input :assigned_marks, label: "Marks" %>
+                <%= f.input :assigned_marks, label: "Marks", autofocus: true %>
                 <%= f.hidden_field :teacher_id,  input_html: { value: current_teacher.id } %>
                 <%= f.hidden_field :student_id, input_html: { value: @job.student.id } %>
                 <%= f.hidden_field :course_id, input_html: { value: @course.id } %>

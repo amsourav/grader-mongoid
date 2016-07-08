@@ -15,6 +15,8 @@
 //= require turbolinks
 //= require bootstrap
 //= require mousetrap.min
+//= require Chart.bundle
+//= require chartkick
 //= require_tree .
 
 $('#new_question').on('shown.bs.modal', function () {

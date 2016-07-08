@@ -8,7 +8,7 @@ class JobsController < ApplicationController
   def index
     @jobs = current_teacher.jobs.where(exam_id: @exam.id).
           order_by(:question_id => 'asce').
-          includes([:student, :question])
+          includes([:student, :question, :grade])
   end
 
   # GET /jobs/1
@@ -26,6 +26,12 @@ class JobsController < ApplicationController
                       )
   end
 
+  def progress
+    @jobs = @exam.jobs
+    questions_id = @jobs.pluck(:question).uniq
+    @questions = Question.find(questions_id)
+  end
+
   def post_grade
     # Add some validations
     @question = @job.question
@@ -40,14 +46,15 @@ class JobsController < ApplicationController
                         exam_id: @exam.id
                         )
         if @grade.save
-            redirect_to course_exam_job_path(@course, @exam, @job.next(current_teacher.id,
-            @exam)) || course_exam_jobs_path(@course, @exam)
+            redirect_to @job.next(current_teacher.id, @exam.id) ? course_exam_job_path(@course, @exam, @job.next(current_teacher.id,
+            @exam)) : course_exam_jobs_path(@course, @exam)
         else
           redirect_to course_exam_job_path(@course, @exam, @job)
         end
     else
       @job.grade.update_attributes(assigned_marks: assigned_marks)
-      redirect_to course_exam_job_path(@course, @exam, @job.next(current_teacher.id, @exam))
+      redirect_to @job.next(current_teacher.id, @exam.id) ? course_exam_job_path(@course, @exam, @job.next(current_teacher.id,
+      @exam)) : course_exam_jobs_path(@course, @exam)
     end
   end
 
@@ -57,7 +64,7 @@ class JobsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_job
-      @job = Job.find(params[:id])
+      @job = Job.find(params[:id]).includes(:grade)
     end
 
     def set_exam

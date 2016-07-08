@@ -5,7 +5,7 @@ class CoursesController < ApplicationController
   # GET /courses
   # GET /courses.json
   def index
-    @courses = current_teacher.courses.all
+    @courses = current_teacher.courses.all.to_a + Course.find(current_teacher.jobs.pluck(:course_id).uniq)
     @course = current_teacher.courses.new
   end
 
