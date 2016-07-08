@@ -1,0 +1,1 @@
+Progress page not working since grade object not created, giving nil class NOMethodError

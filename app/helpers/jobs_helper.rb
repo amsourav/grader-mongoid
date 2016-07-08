@@ -25,8 +25,8 @@ module JobsHelper
   end
 
   def question_chart_json(question)
-    marks = question.jobs.includes(:grade).map(&:grade).map(&:assigned_marks).map(&:sum)
-    rolls = question.jobs.includes(:grade).map(&:grade).map(&:student).map(&:roll)
+    marks = question.jobs.includes(:grade).map(&:grade).map(&:assigned_marks).map(&:sum) || 0
+    rolls = question.jobs.includes(:grade).map(&:grade).map(&:student).map(&:roll) || nil
     return Hash[rolls.zip marks]
   end
 
