@@ -10,7 +10,6 @@ gem 'mongoid-slug'
 gem 'thin'
 gem 'react-rails'
 gem "skylight"
-gem 'faster_path'
 gem 'active_model_serializers'
 gem 'sprockets-es6'
 gem 'delayed_job_mongoid'

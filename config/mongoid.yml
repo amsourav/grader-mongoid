@@ -2,17 +2,17 @@ development:
   clients:
     default:
       database: grader_development
-      hosts:
-        - localhost:27017
+      hosts: ["db:27017"]
       options:
-  options:
+        read:
+          mode: :primary
+        max_pool_size: 1
 
 test:
   clients:
     default:
       database: grader_test
-      hosts:
-        - localhost:27017
+      hosts: ["db:27017"]
       options:
         read:
           mode: :primary
@@ -22,8 +22,7 @@ production:
   clients:
     default:
       database: grader_production
-      hosts:
-        - localhost:27017
+      hosts: ["db:27017"]
       options:
         read:
           mode: :primary

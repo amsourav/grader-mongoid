@@ -72,12 +72,18 @@ class CoursesController < ApplicationController
 
   def upload_student_roster
     @student_roster = @course.build_student_roster(upload_student_roster_params)
+    # puts @student_roster.save
     if @student_roster.save
       count = RegisterStudentToCourseJob.perform_now(@student_roster.student_list.path, @course)
       respond_to do |format|
         flash[:notice] = "#{count} new students were added!"
         format.html { redirect_to courses_url }
       end
+    else
+      respond_to do |format|
+        flash[:notice] = "Error in upload!"
+        format.html { redirect_to courses_url }
+      end 
     end
   end
 
