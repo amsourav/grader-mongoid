@@ -4,6 +4,11 @@ RUN apt-get update -qq && apt-get install -y build-essential libpq-dev nodejs
 
 RUN apt-get install -y libfreeimage-dev libfreetype6-dev
 
+
+# Add apt.conf inside ./etc/apt to run behind proxy
+
+ADD etc etc
+
 RUN mkdir /grader
 
 WORKDIR /grader
@@ -12,10 +17,12 @@ RUN wget 'https://assets.documentcloud.org/pdfium/libpdfium-dev_20151208.015427_
 
 RUN dpkg -i libpdfium-dev_20151208.015427_amd64.deb
 
-ADD Gemfile /grader/Gemfile
+ADD Gemfile Gemfile
+
+ADD Gemfile.lock Gemfile.lock
 
 RUN bundle install
 
-ADD . /grader
+EXPOSE 3000
 
-RUN ln -sf /proc/1/fd/1 /grader/log/test.log
+CMD rails runner 'Delayed::Backend::Mongoid::Job.create_indexes'
