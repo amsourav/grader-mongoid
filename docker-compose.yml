@@ -3,6 +3,8 @@ version: '2'
 services:
   db:
     image: mongo
+    volumes:
+      - ./data/db:/data/db
     ports:
       - "27017:27017"
   web:
@@ -13,4 +15,6 @@ services:
     ports:
       - "3000:3000"
     links:
-      - db 
+      - db
+volumes:
+  db: 

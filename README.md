@@ -38,3 +38,17 @@ sudo apt-get install libfreeimage-dev libfreetype6-dev
 wget 'https://assets.documentcloud.org/pdfium/libpdfium-dev_20151208.015427_amd64.deb'
 sudo dpkg -i libpdfium-dev_20151208.015427_amd64.deb
 ```
+
+Dockerized Steps
+===================
+
+All settings included inside docker; No need to run above steps
+
+- Install [docker-compose](https://docs.docker.com/compose/install/)
+- Add apt.conf inside ./etc/apt to run behind proxy
+- In current folder do `docker-compose build`
+- To run do `sh run.sh`
+
+
+
+
