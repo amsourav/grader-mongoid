@@ -1,0 +1,51 @@
+<div style="text-align:center;">
+<%= link_to 'Check Progress',  progress_course_exam_jobs_path, class: 'btn btn-info-outline' %>
+<div style="float: right;">
+  <%= link_to 'Manage Exam', manage_course_exam_path(@course, @exam), class: 'btn btn-warning-outline' %>
+</div>
+</div>
+
+  <br>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>
+        Student
+      </th>
+      <th>Question</th>
+      <th>
+          Max Marks
+      </th>
+      <th>
+          Marks
+      </th>
+      <th colspan="1"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @jobs.each do |job| %>
+      <tr>
+        <td>
+          <%= job.student.name %>
+        </td>
+        <td>
+          <%= job.question.tag %>
+        </td>
+        <td>
+          <%= job.question.mark %>
+        </td>
+        <td>
+          <%= job.grade ? job.grade.assigned_marks : 'Ungraded' %>
+        </td>
+        <% if job.grade? %>
+          <td><%= link_to 'Graded', course_exam_job_path(@course, @exam, job), class: 'btn btn-success' %></td>
+        <% else %>
+          <td><%= link_to 'Show', course_exam_job_path(@course, @exam, job), class: 'btn btn-warning' %></td>
+        <% end %>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>

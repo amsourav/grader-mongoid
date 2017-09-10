@@ -1,6 +1,6 @@
 WiredTiger version string
-WiredTiger 2.9.1: (December  7, 2016)
+WiredTiger 2.9.2: (December 23, 2016)
 WiredTiger version
-major=2,minor=9,patch=1
+major=2,minor=9,patch=2
 file:WiredTiger.wt
-access_pattern_hint=none,allocation_size=4KB,app_metadata=,block_allocation=best,block_compressor=,cache_resident=false,checkpoint=(WiredTigerCheckpoint.20=(addr="019481e4b57861b09581e46bf805539781e411ff158b808080e3016fc0e26fc0",order=20,time=1489298597,size=40960,write_gen=38)),checkpoint_lsn=(5,275968),checksum=uncompressed,collator=,columns=,dictionary=0,encryption=(keyid=,name=),format=btree,huffman_key=,huffman_value=,id=0,ignore_in_memory_cache_size=false,internal_item_max=0,internal_key_max=0,internal_key_truncate=true,internal_page_max=4KB,key_format=S,key_gap=10,leaf_item_max=0,leaf_key_max=0,leaf_page_max=32KB,leaf_value_max=0,log=(enabled=true),memory_page_max=5MB,os_cache_dirty_max=0,os_cache_max=0,prefix_compression=false,prefix_compression_min=4,split_deepen_min_child=0,split_deepen_per_child=0,split_pct=75,value_format=S,version=(major=1,minor=1)
+access_pattern_hint=none,allocation_size=4KB,app_metadata=,block_allocation=best,block_compressor=,cache_resident=false,checkpoint=(WiredTigerCheckpoint.64=(addr="019081e42e5e5bc79181e468f32d1a9981e4c60274b0808080e3018fc0e27fc0",order=64,time=1505053578,size=45056,write_gen=160)),checkpoint_lsn=(10,552960),checksum=uncompressed,collator=,columns=,dictionary=0,encryption=(keyid=,name=),format=btree,huffman_key=,huffman_value=,id=0,ignore_in_memory_cache_size=false,internal_item_max=0,internal_key_max=0,internal_key_truncate=true,internal_page_max=4KB,key_format=S,key_gap=10,leaf_item_max=0,leaf_key_max=0,leaf_page_max=32KB,leaf_value_max=0,log=(enabled=true),memory_page_max=5MB,os_cache_dirty_max=0,os_cache_max=0,prefix_compression=false,prefix_compression_min=4,split_deepen_min_child=0,split_deepen_per_child=0,split_pct=75,value_format=S,version=(major=1,minor=1)

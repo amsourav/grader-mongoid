@@ -1,0 +1,17 @@
+// Place all the styles related to the jobs controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+.col-left, .col-right {
+    display: inline-block;
+}
+
+.col-left {
+    float: left;
+    width: 80%
+}
+
+.col-right {
+    float: left;
+    width: 20%;
+}

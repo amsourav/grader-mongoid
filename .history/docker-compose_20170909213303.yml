@@ -1,0 +1,20 @@
+version: '2'
+
+services:
+  db:
+    image: mongo
+    volumes:
+      - ./data/db:/data/db
+    ports:
+      - "27017:27017"
+  web:
+    build: .
+    command: bundle exec foreman start
+    volumes:
+      - .:/grader
+    ports:
+      - "3000:3000"
+    links:
+      - db
+volumes:
+  db:
